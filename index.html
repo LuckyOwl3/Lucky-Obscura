@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUCKY OBSCURA — Independent Perfumery</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:      #050505;
+  --deep:       #0a0a0a;
+  --dark:       #0f0e0c;
+  --fog:        #161410;
+  --accent:     #c89b3c;
+  --accent-dim: #7a5e22;
+  --accent-soft: rgba(200,155,60,0.18);
+  --cream:      #eaeaea;
+  --muted:      #6a6050;
+  --faint:      rgba(234,234,234,0.44);
+  --faint2:     rgba(234,234,234,0.24);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: radial-gradient(circle at top, #111111 0%, #050505 100%);
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CURSOR ── */
+.cursor      { width:5px;height:5px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%); }
+.cursor-ring { width:26px;height:26px;border:1px solid rgba(200,155,60,0.3);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s; }
+
+/* ── GRAIN ── */
+body::after {
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9990;opacity:.85;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:32px 72px;
+  background:linear-gradient(to bottom,rgba(5,5,5,0.97),transparent);
+}
+.nav-logo { text-decoration:none;display:flex;flex-direction:column;align-items:flex-start;gap:3px; }
+.nav-logo-mark { font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:400;letter-spacing:6px;color:#c89b3c;line-height:1; }
+.nav-logo-rule { width:24px;height:1px;background:rgba(200,155,60,0.6); }
+.nav-logo-name { font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:5px;color:var(--cream);line-height:1; }
+.nav-links { display:flex;gap:48px;list-style:none; }
+.nav-links a { font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s; }
+.nav-links a:hover { color:var(--cream); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 140px 72px 120px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(200,155,60,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(200,155,60,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+/* subtle horizontal rules flanking the monogram */
+.hero-rule-left, .hero-rule-right {
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(200,155,60,0.25));
+}
+.hero-rule-left  { left: 72px; }
+.hero-rule-right { right: 72px; transform: scaleX(-1); }
+
+/* LO monogram */
+.hero-lo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 64px;
+  opacity: 0;
+  animation: fadeUp 1.1s ease .1s forwards;
+  position: relative;
+}
+.hero-lo::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(200,155,60,0.13) 0%, transparent 70%);
+  filter: blur(70px);
+  z-index: -1;
+  pointer-events: none;
+}
+.hero-lo-letters {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(110px, 16vw, 180px);
+  font-weight: 300;
+  letter-spacing: 36px;
+  color: #c89b3c;
+  line-height: 1;
+  text-indent: 36px;
+}
+.hero-lo-rule {
+  width: 60px;
+  height: 1px;
+  background: rgba(200,155,60,0.45);
+}
+
+.hero-wordmark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: 10px;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeUp 1s ease .4s forwards;
+}
+.hero-sub {
+  font-family: 'Courier Prime', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeUp 1s ease .55s forwards;
+}
+.hero-location {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  letter-spacing: 2px;
+  color: rgba(200,155,60,0.5);
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 1s ease .65s forwards;
+}
+.hero-body {
+  font-size: 19px;
+  line-height: 1.85;
+  font-style: italic;
+  color: var(--faint);
+  max-width: 480px;
+  opacity: 0;
+  animation: fadeUp .9s ease .7s forwards;
+}
+.hero-body-small {
+  font-size: 16px;
+  line-height: 1.75;
+  font-style: italic;
+  color: var(--faint2);
+  max-width: 420px;
+  margin-top: 14px;
+  opacity: 0;
+  animation: fadeUp .9s ease .82s forwards;
+}
+.hero-cta {
+  margin-top: 60px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeUp .9s ease .96s forwards;
+}
+.btn-solid {
+  font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:3px;
+  text-transform:uppercase;color:#111;background:var(--accent);
+  padding:14px 32px;text-decoration:none;display:inline-block;
+  transition:background .3s,transform .2s;cursor:none;border:none;
+}
+.btn-solid:hover { background:var(--cream);transform:translateY(-2px); }
+.btn-outline {
+  font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--accent);
+  border:1px solid var(--accent);
+  padding:14px 32px;text-decoration:none;display:inline-block;
+  transition:color .3s,border-color .3s,background .3s;cursor:none;
+}
+.btn-outline:hover { color:#111;background:var(--accent);border-color:var(--accent); }
+
+/* ── DIVIDER ── */
+.section-divider { width:100%;height:1px;background:linear-gradient(to right,transparent,rgba(200,155,60,0.18),transparent); }
+
+/* ── SHARED ── */
+.section-label {
+  font-family:'Courier Prime',monospace;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);display:block;margin-bottom:16px;
+}
+
+/* ── COLLECTION ── */
+.collection { padding:150px 72px;max-width:1320px;margin:0 auto; }
+.collection-header { margin-bottom:90px; }
+.collection-title { font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:2px;color:var(--cream);line-height:.9;margin-bottom:28px; }
+.collection-intro { font-size:17px;line-height:1.8;color:var(--faint);font-style:italic;max-width:460px; }
+
+.scent-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:2px; }
+
+.scent-card {
+  background:var(--dark);
+  border:1px solid rgba(200,155,60,0);
+  padding:52px 44px;
+  position:relative;overflow:hidden;
+  transition:border-color .5s,background .5s;
+  cursor:none;
+}
+.scent-card:hover { border-color:rgba(200,155,60,0.18);background:var(--fog); }
+.scent-card::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(to right,transparent,rgba(200,155,60,0.3),transparent);
+  opacity:0;transition:opacity .5s;
+}
+.scent-card:hover::before { opacity:1; }
+
+.scent-num { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;color:var(--accent-dim);margin-bottom:32px;display:block; }
+.scent-name { font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:var(--cream);line-height:1;margin-bottom:8px; }
+.scent-sub { font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:1px;color:var(--accent);font-style:italic;margin-bottom:28px; }
+.scent-desc { font-size:16px;line-height:1.75;color:var(--faint);font-style:italic;margin-bottom:36px; }
+.scent-materials { display:flex;flex-wrap:wrap;gap:6px;margin-bottom:36px; }
+.scent-material {
+  font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:1px solid rgba(200,155,60,0.14);padding:5px 10px;
+}
+
+/* Layer breakdown inside card */
+.scent-layers { border-top:1px solid rgba(200,155,60,0.08);padding-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+.layer { }
+.layer-label { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:10px; }
+.layer-label::before { content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0; }
+.layer.top .layer-label { color:rgba(220,205,145,0.75); }
+.layer.top .layer-label::before { background:rgba(220,205,145,0.65); }
+.layer.mid .layer-label { color:var(--accent); }
+.layer.mid .layer-label::before { background:var(--accent); }
+.layer.base .layer-label { color:rgba(155,100,46,0.85); }
+.layer.base .layer-label::before { background:rgba(155,100,46,0.8); }
+.layer-items { list-style:none;display:flex;flex-direction:column;gap:5px; }
+.layer-items li { font-size:13px;font-style:italic;color:var(--faint2);line-height:1.4; }
+
+.scent-type { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(106,96,80,0.6);margin-top:28px;display:block; }
+
+/* ── PROMISE STRIP ── */
+.promise-strip { background:var(--accent);padding:16px 0;overflow:hidden; }
+.promise-track { display:flex;white-space:nowrap;animation:marquee 32s linear infinite; }
+.promise-item { font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:4px;color:#111;padding:0 52px;display:flex;align-items:center;gap:32px;flex-shrink:0; }
+.promise-item::after { content:'◆';font-size:7px; }
+
+/* ── LABORATORY ── */
+.lab { background:var(--dark);padding:150px 72px; }
+.lab-inner { max-width:1100px;margin:0 auto; }
+.lab-head { display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:52px;border-bottom:1px solid rgba(200,155,60,0.1);margin-bottom:0; }
+.lab-title { font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:2px;color:var(--cream);line-height:.9; }
+.lab-intro { font-size:15px;line-height:1.75;color:var(--faint);font-style:italic;max-width:260px;text-align:right; }
+
+.note { display:grid;grid-template-columns:110px 1fr auto;gap:52px;align-items:start;padding:36px 0;border-bottom:1px solid rgba(200,155,60,0.06);transition:padding-left .3s; }
+.note:hover { padding-left:10px; }
+.note-date { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;color:var(--accent-dim);padding-top:3px;line-height:1.6; }
+.note-title { font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1.5px;color:var(--cream);margin-bottom:10px; }
+.note-body { font-size:14px;line-height:1.75;color:var(--muted);font-style:italic;white-space:pre-line; }
+.note-tag { font-family:'Courier Prime',monospace;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(200,155,60,0.22);padding:5px 10px;white-space:nowrap;flex-shrink:0;margin-top:3px; }
+
+/* ── PERFUMER ── */
+.perfumer { padding:150px 72px;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:110px;align-items:center; }
+.perfumer-portrait {
+  aspect-ratio:3/4;background:var(--dark);
+  border:1px solid rgba(200,155,60,0.1);
+  position:relative;overflow:hidden;
+}
+.perfumer-portrait::after {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(5,5,5,0.6) 0%, transparent 45%);
+  pointer-events:none;z-index:1;
+}
+.perfumer-photo { width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:brightness(0.88) contrast(1.06); }
+.perfumer-tag {
+  position:absolute;bottom:24px;left:24px;
+  font-family:'Courier Prime',monospace;font-size:8.5px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--accent);
+  background:rgba(5,5,5,0.9);padding:8px 12px;
+  border:1px solid rgba(200,155,60,0.2);z-index:2;
+}
+
+.perfumer-heading {
+  font-family:'Bebas Neue',sans-serif;font-size:58px;
+  letter-spacing:2px;line-height:.95;color:var(--cream);margin-bottom:40px;
+}
+.perfumer-text { font-size:19px;line-height:1.9;color:var(--faint);margin-bottom:20px; }
+.perfumer-text em { color:var(--accent);font-style:italic; }
+.perfumer-text.small { font-size:16px;color:var(--faint2); }
+.perfumer-sig { margin-top:52px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:34px;color:var(--accent); }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--black);
+  padding:120px 72px 56px;
+  border-top:1px solid rgba(200,155,60,0.07);
+}
+.footer-inner {
+  max-width:1320px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:80px;margin-bottom:72px;
+}
+.footer-lo-mark { display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:14px; }
+.footer-lo-letters { font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;letter-spacing:6px;color:#c89b3c;line-height:1; }
+.footer-lo-rule { width:30px;height:1px;background:rgba(200,155,60,0.6); }
+.footer-name { font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:5px;color:var(--cream);margin-bottom:14px; }
+.footer-name span { color:var(--accent); }
+.footer-tagline { font-size:15px;color:var(--muted);font-style:italic;line-height:1.7;max-width:240px; }
+.footer-col-label { font-family:'Courier Prime',monospace;font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:block; }
+.footer-links { list-style:none;display:flex;flex-direction:column;gap:14px; }
+.footer-links a { font-size:15px;color:var(--muted);text-decoration:none;transition:color .3s;letter-spacing:.3px; }
+.footer-links a:hover { color:var(--cream); }
+.footer-bottom {
+  border-top:1px solid rgba(200,155,60,0.07);padding-top:32px;
+  display:flex;justify-content:space-between;align-items:center;
+  max-width:1320px;margin:0 auto;
+}
+.footer-copy { font-family:'Courier Prime',monospace;font-size:9px;color:rgba(106,96,80,0.4);letter-spacing:1px; }
+
+/* ── MATERIAL PHILOSOPHY ── */
+.materials {
+  padding: 150px 72px;
+  position: relative;
+  overflow: hidden;
+}
+.materials::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(200,155,60,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.materials-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 120px;
+  align-items: start;
+}
+.materials-left {
+  position: sticky;
+  top: 120px;
+}
+.materials-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 88px;
+  letter-spacing: 3px;
+  line-height: .85;
+  color: var(--cream);
+  margin-bottom: 32px;
+}
+.materials-title span {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,155,60,0.35);
+}
+.materials-rule {
+  width: 48px;
+  height: 1px;
+  background: #c89b3c;
+  margin-bottom: 24px;
+}
+.materials-note {
+  font-family: 'Courier Prime', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.materials-right {
+  padding-top: 8px;
+}
+.materials-para {
+  font-size: 22px;
+  line-height: 1.85;
+  color: var(--faint);
+  margin-bottom: 0;
+  font-style: italic;
+}
+.materials-para + .materials-para {
+  margin-top: 32px;
+}
+.materials-para strong {
+  color: var(--cream);
+  font-style: normal;
+  font-weight: 400;
+}
+.materials-para em {
+  color: #c89b3c;
+  font-style: italic;
+}
+.materials-chemicals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 44px 0;
+}
+.chem-tag {
+  font-family: 'Courier Prime', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid rgba(200,155,60,0.18);
+  padding: 7px 14px;
+  transition: color .3s, border-color .3s;
+}
+.chem-tag:hover {
+  color: #c89b3c;
+  border-color: rgba(200,155,60,0.45);
+}
+.materials-closing {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--faint2);
+  font-style: italic;
+  border-left: 1px solid rgba(200,155,60,0.25);
+  padding-left: 28px;
+  margin-top: 44px;
+}
+
+@media(max-width:960px){
+  .materials { padding: 80px 24px; }
+  .materials-inner { grid-template-columns: 1fr; gap: 48px; }
+  .materials-left { position: static; }
+  .materials-title { font-size: 64px; }
+}
+
+/* ── REVEAL ── */
+.reveal { opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease; }
+.reveal.visible { opacity:1;transform:translateY(0); }
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{ padding:20px 24px; }
+  .nav-links{ display:none; }
+  .hero{ padding:100px 24px 80px; }
+  .hero-rule-left, .hero-rule-right{ display:none; }
+  .hero-lo-letters{ font-size:clamp(72px,18vw,110px); }
+  .hero-wordmark{ font-size:clamp(22px,6vw,32px); letter-spacing:6px; }
+  .collection,.perfumer{ padding:100px 24px; }
+  .scent-grid{ grid-template-columns:1fr; }
+  .lab{ padding:100px 24px; }
+  .materials { padding: 100px 24px; }
+  .lab-head{ flex-direction:column;gap:24px;align-items:flex-start; }
+  .lab-intro{ text-align:left;max-width:100%; }
+  .note{ grid-template-columns:1fr;gap:10px; }
+  .note-date{ display:none; }
+  .perfumer{ grid-template-columns:1fr;gap:52px; }
+  .footer-inner{ grid-template-columns:1fr;gap:44px; }
+  footer{ padding:60px 24px 32px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-mark">LO</span>
+    <div class="nav-logo-rule"></div>
+    <span class="nav-logo-name">LUCKY OBSCURA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#laboratory">Laboratory</a></li>
+    <li><a href="#perfumer">The Perfumer</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-rule-left"></div>
+  <div class="hero-rule-right"></div>
+
+  <div class="hero-lo">
+    <span class="hero-lo-letters">LO</span>
+    <div class="hero-lo-rule"></div>
+  </div>
+
+  <h1 class="hero-wordmark">LUCKY OBSCURA</h1>
+  <p class="hero-sub">Independent Perfumery Studio</p>
+  <p class="hero-location">Ljubljana — Slovenia</p>
+
+  <p class="hero-body">Compositions developed slowly through structure, balance, and restraint.</p>
+  <p class="hero-body-small">Each fragrance begins as an experiment — refined until only the essential remains.</p>
+
+  <div class="hero-cta">
+    <a href="#collection" class="btn-solid">View the Collection</a>
+    <a href="#laboratory" class="btn-outline">Enter the Laboratory</a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COLLECTION -->
+<section id="collection">
+  <div class="collection">
+    <div class="collection-header reveal">
+      <span class="section-label">Series I</span>
+      <h2 class="collection-title">THREE<br>COMPOSITIONS</h2>
+      <p class="collection-intro">A small series of compositions exploring contrast, diffusion, and texture. Each edition is produced in limited batches.</p>
+    </div>
+
+    <div class="scent-grid">
+
+      <!-- No. 01 -->
+      <div class="scent-card reveal">
+        <span class="scent-num">Obscura No. 01</span>
+        <div class="scent-name">CEDAR DUSK</div>
+        <div class="scent-sub">Dry woods and mineral air, softened by a quiet amber glow.</div>
+        <div class="scent-materials">
+          <span class="scent-material">Cedarwood</span>
+          <span class="scent-material">Iso E Super</span>
+          <span class="scent-material">Vetiver</span>
+        </div>
+        <div class="scent-layers">
+          <div class="layer top">
+            <div class="layer-label">Top</div>
+            <ul class="layer-items">
+              <li>Iso E Super</li>
+              <li>Black Pepper</li>
+            </ul>
+          </div>
+          <div class="layer mid">
+            <div class="layer-label">Heart</div>
+            <ul class="layer-items">
+              <li>Cedarwood</li>
+              <li>Guaiacwood</li>
+            </ul>
+          </div>
+          <div class="layer base">
+            <div class="layer-label">Base</div>
+            <ul class="layer-items">
+              <li>Vetiver</li>
+              <li>Galaxolide</li>
+            </ul>
+          </div>
+        </div>
+        <span class="scent-type">Extrait de Parfum · £28</span>
+      </div>
+
+      <!-- No. 02 -->
+      <div class="scent-card reveal">
+        <span class="scent-num">Obscura No. 02</span>
+        <div class="scent-name">NOIR PÉTALE</div>
+        <div class="scent-sub">Dark florals suspended in shadowed amber.</div>
+        <div class="scent-materials">
+          <span class="scent-material">Rose</span>
+          <span class="scent-material">Labdanum</span>
+          <span class="scent-material">Benzoin</span>
+        </div>
+        <div class="scent-layers">
+          <div class="layer top">
+            <div class="layer-label">Top</div>
+            <ul class="layer-items">
+              <li>Hedione</li>
+              <li>Bergamot</li>
+            </ul>
+          </div>
+          <div class="layer mid">
+            <div class="layer-label">Heart</div>
+            <ul class="layer-items">
+              <li>Rose Absolute</li>
+              <li>Geranium</li>
+            </ul>
+          </div>
+          <div class="layer base">
+            <div class="layer-label">Base</div>
+            <ul class="layer-items">
+              <li>Labdanum</li>
+              <li>Benzoin</li>
+            </ul>
+          </div>
+        </div>
+        <span class="scent-type">Extrait de Parfum · £32</span>
+      </div>
+
+      <!-- No. 03 -->
+      <div class="scent-card reveal">
+        <span class="scent-num">Obscura No. 03</span>
+        <div class="scent-name">QUIET PROJECTION</div>
+        <div class="scent-sub">Fresh citrus lifted by transparent woods.</div>
+        <div class="scent-materials">
+          <span class="scent-material">Bergamot</span>
+          <span class="scent-material">Hedione</span>
+          <span class="scent-material">Ambroxan</span>
+        </div>
+        <div class="scent-layers">
+          <div class="layer top">
+            <div class="layer-label">Top</div>
+            <ul class="layer-items">
+              <li>Bergamot</li>
+              <li>Grapefruit</li>
+            </ul>
+          </div>
+          <div class="layer mid">
+            <div class="layer-label">Heart</div>
+            <ul class="layer-items">
+              <li>Hedione</li>
+              <li>Iso E Super</li>
+            </ul>
+          </div>
+          <div class="layer base">
+            <div class="layer-label">Base</div>
+            <ul class="layer-items">
+              <li>Ambroxan</li>
+              <li>Habanolide</li>
+            </ul>
+          </div>
+        </div>
+        <span class="scent-type">Extrait de Parfum · Coming Soon</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- MATERIAL PHILOSOPHY -->
+<section id="materials">
+  <div class="materials">
+    <div class="materials-inner">
+
+      <div class="materials-left reveal">
+        <span class="section-label">On craft</span>
+        <h2 class="materials-title">MATE<br><span>RIALS</span></h2>
+        <div class="materials-rule"></div>
+        <p class="materials-note">Aroma chemicals<br>Natural extracts<br>Structure &amp; diffusion</p>
+      </div>
+
+      <div class="materials-right">
+        <p class="materials-para reveal"><strong>Perfume is made from materials.</strong></p>
+        <p class="materials-para reveal">Not marketing. Not celebrity campaigns. Not packaging.</p>
+        <p class="materials-para reveal">Each composition begins with raw aroma chemicals and natural extracts.</p>
+
+        <div class="materials-chemicals reveal">
+          <span class="chem-tag">Cedarwood</span>
+          <span class="chem-tag">Ambroxan</span>
+          <span class="chem-tag">Hedione</span>
+          <span class="chem-tag">Vetiver</span>
+          <span class="chem-tag">Iso E Super</span>
+          <span class="chem-tag">Labdanum</span>
+          <span class="chem-tag">Rose Absolute</span>
+          <span class="chem-tag">Benzoin</span>
+          <span class="chem-tag">Galaxolide</span>
+          <span class="chem-tag">Bergamot</span>
+        </div>
+
+        <p class="materials-para reveal">Learning how they interact — how one chemical amplifies another, how concentration shifts character entirely — is the real work of perfumery.</p>
+
+        <p class="materials-closing reveal">Lucky Obscura is built slowly through experimentation, structure, and curiosity about what scent can become.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- PROMISE STRIP -->
+<div class="promise-strip">
+  <div class="promise-track">
+    <span class="promise-item">Independent perfumery</span>
+    <span class="promise-item">Small batch</span>
+    <span class="promise-item">All materials listed</span>
+    <span class="promise-item">Handmade by Žan</span>
+    <span class="promise-item">Series I</span>
+    <span class="promise-item">Built slowly</span>
+    <span class="promise-item">Independent perfumery</span>
+    <span class="promise-item">Small batch</span>
+    <span class="promise-item">All materials listed</span>
+    <span class="promise-item">Handmade by Žan</span>
+    <span class="promise-item">Series I</span>
+    <span class="promise-item">Built slowly</span>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- LABORATORY -->
+<section id="laboratory">
+  <div class="lab">
+    <div class="lab-inner">
+      <div class="lab-head reveal">
+        <div>
+          <span class="section-label">Working Notebook</span>
+          <h2 class="lab-title">THE<br>LABORATORY</h2>
+        </div>
+        <p class="lab-intro">The place where materials are studied, accords are tested, and compositions evolve. Fragments from the working notebook.</p>
+      </div>
+
+      <div class="note reveal">
+        <div class="note-date">Nov 2024</div>
+        <div>
+          <div class="note-title">CEDAR-VETIVER ACCORD — CV-03</div>
+          <p class="note-body">Cedarwood Virginia with vetiver bourbon.
+Iso E Super introduced at 15% — smoky diffusion without aggression.
+→ Foundation for Cedar Dusk.</p>
+        </div>
+        <span class="note-tag">Accord Development</span>
+      </div>
+
+      <div class="note reveal">
+        <div class="note-date">Dec 2024</div>
+        <div>
+          <div class="note-title">MINERAL CITRUS STUDY — MC-01</div>
+          <p class="note-body">Bergamot and grapefruit with Calone at trace levels.
+Unexpected lift when Hedione exceeded 20%.
+→ Direction for Quiet Projection.</p>
+        </div>
+        <span class="note-tag">Material Study</span>
+      </div>
+
+      <div class="note reveal">
+        <div class="note-date">Jan 2025</div>
+        <div>
+          <div class="note-title">DARK FLORAL — NP-02</div>
+          <p class="note-body">Rose absolute + patchouli + trace oud.
+Very dark floral profile. Oud pulls masculine above 3%.
+Hedione at 8% lifts without sweetening.
+→ Confirmed direction for Noir Pétale.</p>
+        </div>
+        <span class="note-tag">Development</span>
+      </div>
+
+      <div class="note reveal">
+        <div class="note-date">Mar 2025</div>
+        <div>
+          <div class="note-title">ISO E SUPER — CONCENTRATION STUDY</div>
+          <p class="note-body">Tested at 5%, 10%, 20% in alcohol on strips.
+5%: almost imperceptible.
+10%: clean balance, good projection.
+20%: overpowers, headache-inducing.
+→ 10% ceiling for Cedar Dusk.</p>
+        </div>
+        <span class="note-tag">Material Study</span>
+      </div>
+
+      <div class="note reveal">
+        <div class="note-date">May 2025</div>
+        <div>
+          <div class="note-title">AMBER STRUCTURE — AS-02</div>
+          <p class="note-body">Ambroxan, labdanum, and benzoin tested in three ratios.
+Version B produced the smoothest drydown.
+→ Possible base for Noir Pétale and Series II.</p>
+        </div>
+        <span class="note-tag">Base Accord</span>
+      </div>
+
+      <div class="note reveal">
+        <div class="note-date">Ongoing</div>
+        <div>
+          <div class="note-title">SERIES II — GYM-BL-03 PROTOTYPE</div>
+          <p class="note-body">Too much dihydromyrcenol — metallic, synthetic top.
+Needs more citrus. Bergamot + grapefruit being tested.
+Vetiver base is solid. Top needs 2–3 more iterations.
+→ Not ready.</p>
+        </div>
+        <span class="note-tag">Formula</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PERFUMER -->
+<section id="perfumer">
+  <div class="perfumer">
+    <div class="perfumer-portrait reveal">
+      <img src="data:image/jpeg;base64,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" class="perfumer-photo" alt="Žan Sedej">
+      <div class="perfumer-tag">Žan Sedej — Perfumer</div>
+    </div>
+    <div class="reveal">
+      <span class="section-label">The Perfumer</span>
+      <h2 class="perfumer-heading">ŽAN<br>SEDEJ</h2>
+      <p class="perfumer-text">Lucky Obscura was founded by perfumer <em>Žan Sedej</em>. Each fragrance is developed through experimentation with aroma chemicals and natural materials, with a focus on structure, balance, and diffusion.</p>
+      <p class="perfumer-text small">The process is deliberate.<br>Nothing is rushed.</p>
+      <div class="perfumer-sig">— Žan</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-lo-mark">
+        <span class="footer-lo-letters">LO</span>
+        <div class="footer-lo-rule"></div>
+      </div>
+      <div class="footer-name">LUCKY <span>OBSCURA</span></div>
+      <p class="footer-tagline">Independent perfumery.<br>Built slowly.</p>
+    </div>
+    <div>
+      <span class="footer-col-label">Navigate</span>
+      <ul class="footer-links">
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#laboratory">Laboratory</a></li>
+        <li><a href="#perfumer">The Perfumer</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-label">Connect</span>
+      <ul class="footer-links">
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Lucky Obscura. All rights reserved.</span>
+    <span class="footer-copy">Series I. More to come.</span>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cursor.style.left=mx+'px';cursor.style.top=my+'px';
+  });
+  (function loop(){
+    rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*70);
+    });
+  },{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
