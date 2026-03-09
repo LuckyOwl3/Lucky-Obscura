@@ -17,9 +17,9 @@
   --accent-dim: #7a5e22;
   --accent-soft: rgba(200,155,60,0.18);
   --cream:      #eaeaea;
-  --muted:      #6a6050;
-  --faint:      rgba(234,234,234,0.44);
-  --faint2:     rgba(234,234,234,0.24);
+  --muted:      #c8b89a;
+  --faint:      rgba(220,205,180,0.72);
+  --faint2:     rgba(200,184,154,0.50);
 }
 
 html { scroll-behavior: smooth; }
@@ -54,7 +54,7 @@ nav {
 .nav-logo-rule { width:24px;height:1px;background:rgba(200,155,60,0.6); }
 .nav-logo-name { font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:5px;color:var(--cream);line-height:1; }
 .nav-links { display:flex;gap:48px;list-style:none; }
-.nav-links a { font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s; }
+.nav-links a { font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:#a89478;text-decoration:none;transition:color .3s; }
 .nav-links a:hover { color:var(--cream); }
 
 /* ── HERO ── */
@@ -263,7 +263,7 @@ nav {
 
 /* ── PROMISE STRIP ── */
 .promise-strip { background:var(--accent);padding:16px 0;overflow:hidden; }
-.promise-track { display:flex;white-space:nowrap;animation:marquee 32s linear infinite; }
+.promise-track { display:flex;white-space:nowrap;animation:marquee 18s linear infinite; }
 .promise-item { font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:4px;color:#111;padding:0 52px;display:flex;align-items:center;gap:32px;flex-shrink:0; }
 .promise-item::after { content:'◆';font-size:7px; }
 
@@ -278,7 +278,7 @@ nav {
 .note:hover { padding-left:10px; }
 .note-date { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;color:var(--accent-dim);padding-top:3px;line-height:1.6; }
 .note-title { font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1.5px;color:var(--cream);margin-bottom:10px; }
-.note-body { font-size:14px;line-height:1.75;color:var(--muted);font-style:italic;white-space:pre-line; }
+.note-body { font-size:14px;line-height:1.75;color:#b8a888;font-style:italic;white-space:pre-line; }
 .note-tag { font-family:'Courier Prime',monospace;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(200,155,60,0.22);padding:5px 10px;white-space:nowrap;flex-shrink:0;margin-top:3px; }
 
 /* ── PERFUMER ── */
@@ -326,10 +326,10 @@ footer {
 .footer-lo-rule { width:30px;height:1px;background:rgba(200,155,60,0.6); }
 .footer-name { font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:5px;color:var(--cream);margin-bottom:14px; }
 .footer-name span { color:var(--accent); }
-.footer-tagline { font-size:15px;color:var(--muted);font-style:italic;line-height:1.7;max-width:240px; }
+.footer-tagline { font-size:15px;color:#c8b89a;font-style:italic;line-height:1.7;max-width:240px; }
 .footer-col-label { font-family:'Courier Prime',monospace;font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:block; }
 .footer-links { list-style:none;display:flex;flex-direction:column;gap:14px; }
-.footer-links a { font-size:15px;color:var(--muted);text-decoration:none;transition:color .3s;letter-spacing:.3px; }
+.footer-links a { font-size:15px;color:#c8b89a;text-decoration:none;transition:color .3s;letter-spacing:.3px; }
 .footer-links a:hover { color:var(--cream); }
 .footer-bottom {
   border-top:1px solid rgba(200,155,60,0.07);padding-top:32px;
@@ -448,6 +448,52 @@ footer {
   .materials-title { font-size: 64px; }
 }
 
+/* ── HAMBURGER ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 4px;
+  z-index: 200;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--cream);
+  transition: transform .3s, opacity .3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* mobile drawer */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,5,0.97);
+  z-index: 150;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.nav-drawer.open { display: flex; }
+.nav-drawer a {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px;
+  letter-spacing: 4px;
+  color: var(--cream);
+  text-decoration: none;
+  transition: color .3s;
+}
+.nav-drawer a:hover { color: #c89b3c; }
+.nav-drawer-rule { width: 40px; height: 1px; background: rgba(200,155,60,0.3); }
+
 /* ── REVEAL ── */
 .reveal { opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease; }
 .reveal.visible { opacity:1;transform:translateY(0); }
@@ -459,23 +505,55 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
+  /* Nav */
   nav{ padding:20px 24px; }
   .nav-links{ display:none; }
-  .hero{ padding:100px 24px 80px; }
+  .nav-hamburger{ display:flex; }
+
+  /* Hero */
+  .hero{ padding:110px 28px 80px; }
   .hero-rule-left, .hero-rule-right{ display:none; }
-  .hero-lo-letters{ font-size:clamp(72px,18vw,110px); }
-  .hero-wordmark{ font-size:clamp(22px,6vw,32px); letter-spacing:6px; }
-  .collection,.perfumer{ padding:100px 24px; }
-  .scent-grid{ grid-template-columns:1fr; }
-  .lab{ padding:100px 24px; }
-  .materials { padding: 100px 24px; }
-  .lab-head{ flex-direction:column;gap:24px;align-items:flex-start; }
-  .lab-intro{ text-align:left;max-width:100%; }
-  .note{ grid-template-columns:1fr;gap:10px; }
+  .hero-lo{ margin-bottom:40px; }
+  .hero-lo-letters{ font-size:clamp(80px,20vw,120px); letter-spacing:20px; text-indent:20px; }
+  .hero-lo::before{ width:260px; height:260px; }
+  .hero-wordmark{ font-size:clamp(20px,6vw,28px); letter-spacing:5px; }
+  .hero-sub{ font-size:9px; letter-spacing:3px; }
+  .hero-body{ font-size:17px; }
+  .hero-body-small{ font-size:14px; }
+  .hero-cta{ flex-direction:column; gap:14px; width:100%; }
+  .btn-solid, .btn-outline{ width:100%; text-align:center; padding:16px 24px; }
+
+  /* Collection */
+  .collection{ padding:90px 24px; }
+  .scent-grid{ grid-template-columns:1fr; gap:1px; }
+  .scent-card{ padding:40px 28px; }
+  .scent-layers{ grid-template-columns:1fr; gap:20px; border-top:none; padding-top:0; }
+
+  /* Materials */
+  .materials{ padding:90px 24px; }
+  .materials-inner{ grid-template-columns:1fr; gap:40px; }
+  .materials-left{ position:static; }
+  .materials-title{ font-size:56px; }
+  .materials-para{ font-size:18px; }
+
+  /* Lab */
+  .lab{ padding:90px 24px; }
+  .lab-head{ flex-direction:column; gap:20px; align-items:flex-start; }
+  .lab-intro{ text-align:left; max-width:100%; }
+  .note{ grid-template-columns:1fr; gap:12px; padding:28px 0; }
   .note-date{ display:none; }
-  .perfumer{ grid-template-columns:1fr;gap:52px; }
-  .footer-inner{ grid-template-columns:1fr;gap:44px; }
-  footer{ padding:60px 24px 32px; }
+  .note-tag{ align-self:flex-start; }
+
+  /* Perfumer */
+  .perfumer{ padding:90px 24px; grid-template-columns:1fr; gap:48px; }
+  .perfumer-portrait{ order:-1; aspect-ratio:4/5; }
+  .perfumer-heading{ font-size:44px; }
+  .perfumer-text{ font-size:17px; }
+
+  .promise-track { animation-duration: 10s; }
+  .footer-inner{ grid-template-columns:1fr; gap:40px; margin-bottom:48px; }
+  footer{ padding:80px 24px 36px; }
+  .footer-bottom{ flex-direction:column; gap:12px; text-align:center; }
 }
 </style>
 </head>
@@ -497,7 +575,23 @@ footer {
     <li><a href="#perfumer">The Perfumer</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="drawer">
+  <a href="#collection" class="drawer-link">Collection</a>
+  <div class="nav-drawer-rule"></div>
+  <a href="#laboratory" class="drawer-link">Laboratory</a>
+  <div class="nav-drawer-rule"></div>
+  <a href="#materials" class="drawer-link">Materials</a>
+  <div class="nav-drawer-rule"></div>
+  <a href="#perfumer" class="drawer-link">The Perfumer</a>
+  <div class="nav-drawer-rule"></div>
+  <a href="#contact" class="drawer-link">Contact</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -850,6 +944,21 @@ Vetiver base is solid. Top needs 2–3 more iterations.
 </footer>
 
 <script>
+  const burger = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawer');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
   const cursor = document.getElementById('cursor');
   const ring   = document.getElementById('cursorRing');
   let mx=0,my=0,rx=0,ry=0;
