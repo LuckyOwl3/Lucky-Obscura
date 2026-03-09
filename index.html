@@ -651,6 +651,53 @@ footer {
   footer{ padding:80px 24px 36px; }
   .footer-bottom{ flex-direction:column; gap:12px; text-align:center; }
 }
+
+/* ── SUBPAGES ── */
+.sp-nav { display:none;position:fixed;top:0;left:0;right:0;z-index:200;justify-content:space-between;align-items:center;padding:28px 72px;background:linear-gradient(to bottom,rgba(5,5,5,0.97),transparent); }
+.subpage:not([style*="display:none"]) .sp-nav { display:flex; }
+.sp-back { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .3s,border-color .3s;cursor:none;border:1px solid rgba(200,155,60,0.25);padding:10px 20px; }
+.sp-back:hover { color:#c89b3c;border-color:rgba(200,155,60,0.6); }
+.sp-logo { font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;letter-spacing:5px;text-transform:uppercase;color:var(--cream);text-decoration:none;transition:color .3s;cursor:none; }
+.sp-logo:hover { color:#c89b3c; }
+.sp-hero { min-height:70vh;display:flex;flex-direction:column;justify-content:flex-end;padding:110px 72px 90px;position:relative;overflow:hidden; }
+.sp-hero-bg { position:absolute;inset:0;pointer-events:none; }
+.sp-num { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#c89b3c;margin-bottom:24px;display:block; }
+.sp-title { font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(64px,11vw,130px);line-height:.85;letter-spacing:4px;color:var(--cream);margin-bottom:32px; }
+.sp-tagline { font-size:22px;font-style:italic;color:var(--faint);max-width:520px;line-height:1.7;margin-bottom:48px; }
+.sp-price-row { display:flex;align-items:center;gap:32px; }
+.sp-price { font-family:'Cormorant Garamond',serif;font-weight:300;font-size:48px;letter-spacing:2px;color:#c89b3c; }
+.sp-type { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted); }
+.sp-buy { font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:#111;background:#c89b3c;padding:14px 36px;text-decoration:none;display:inline-block;transition:background .3s;cursor:none;border:none; }
+.sp-buy:hover { background:var(--cream); }
+.sp-body { max-width:1320px;margin:0 auto;padding:100px 72px; }
+.sp-grid { display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:100px; }
+.sp-section-label { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#c89b3c;display:block;margin-bottom:20px; }
+.sp-section-title { font-family:'Cormorant Garamond',serif;font-weight:300;font-size:52px;letter-spacing:3px;color:var(--cream);line-height:.9;margin-bottom:32px;text-transform:uppercase; }
+.sp-mood { font-size:19px;line-height:1.9;color:var(--faint);font-style:italic; }
+.sp-layers { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px; }
+.sp-layer-title { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px; }
+.sp-layer-title::before { content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0; }
+.sp-layer-top .sp-layer-title { color:rgba(220,205,145,0.8); }
+.sp-layer-top .sp-layer-title::before { background:rgba(220,205,145,0.7); }
+.sp-layer-mid .sp-layer-title { color:#c89b3c; }
+.sp-layer-mid .sp-layer-title::before { background:#c89b3c; }
+.sp-layer-base .sp-layer-title { color:rgba(155,100,46,0.9); }
+.sp-layer-base .sp-layer-title::before { background:rgba(155,100,46,0.85); }
+.sp-layer-items { list-style:none;display:flex;flex-direction:column;gap:10px; }
+.sp-layer-items li { font-size:15px;font-style:italic;color:var(--faint);line-height:1.4; }
+.sp-divider { width:100%;height:1px;background:linear-gradient(to right,transparent,rgba(200,155,60,0.15),transparent);margin:0 0 80px; }
+.sp-note { padding:28px 0;border-bottom:1px solid rgba(200,155,60,0.07); }
+.sp-note-title { font-family:'Cormorant Garamond',serif;font-weight:400;font-size:18px;letter-spacing:2px;color:var(--cream);margin-bottom:8px;text-transform:uppercase; }
+.sp-note-body { font-size:14px;line-height:1.75;color:#b8a888;font-style:italic; }
+.sp-note-tag { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c89b3c;border:1px solid rgba(200,155,60,0.2);padding:4px 10px;display:inline-block;margin-top:12px; }
+@media(max-width:960px){
+  .sp-nav{ padding:20px 24px; }
+  .sp-hero{ padding:90px 24px 70px; }
+  .sp-body{ padding:70px 24px; }
+  .sp-grid{ grid-template-columns:1fr;gap:52px; }
+  .sp-layers{ grid-template-columns:1fr;gap:20px; }
+  .sp-price-row{ flex-wrap:wrap;gap:16px; }
+}
 </style>
 </head>
 <body>
@@ -746,8 +793,8 @@ footer {
           <div class="layer top">
             <div class="layer-label">Top</div>
             <ul class="layer-items">
-              <li>Iso E Super</li>
               <li>Black Pepper</li>
+              <li>Mineral Accord</li>
             </ul>
           </div>
           <div class="layer mid">
@@ -761,7 +808,7 @@ footer {
             <div class="layer-label">Base</div>
             <ul class="layer-items">
               <li>Vetiver</li>
-              <li>Galaxolide</li>
+              <li>Clean Musk</li>
             </ul>
           </div>
         </div>
@@ -777,14 +824,14 @@ footer {
           <div class="layer top">
             <div class="layer-label">Top</div>
             <ul class="layer-items">
-              <li>Hedione</li>
               <li>Bergamot</li>
+              <li>White Florals</li>
             </ul>
           </div>
           <div class="layer mid">
             <div class="layer-label">Heart</div>
             <ul class="layer-items">
-              <li>Rose Absolute</li>
+              <li>Rose</li>
               <li>Geranium</li>
             </ul>
           </div>
@@ -815,15 +862,15 @@ footer {
           <div class="layer mid">
             <div class="layer-label">Heart</div>
             <ul class="layer-items">
-              <li>Hedione</li>
-              <li>Iso E Super</li>
+              <li>Soft Cedarwood</li>
+              <li>Smoke</li>
             </ul>
           </div>
           <div class="layer base">
             <div class="layer-label">Base</div>
             <ul class="layer-items">
-              <li>Ambroxan</li>
-              <li>Habanolide</li>
+              <li>Amber</li>
+              <li>Musk</li>
             </ul>
           </div>
         </div>
@@ -1099,9 +1146,11 @@ footer {
 
   // ── SUBPAGE ROUTER ──
   function showPage(id) {
+    const mainNav = document.querySelector('nav');
     document.getElementById('main-site').style.display = 'none';
     document.querySelectorAll('.subpage').forEach(p => p.style.display = 'none');
     if (id) {
+      mainNav.style.display = 'none';
       const page = document.getElementById('page-' + id);
       if (page) {
         page.style.display = 'block';
@@ -1113,6 +1162,7 @@ footer {
         });
       }
     } else {
+      mainNav.style.display = '';
       document.getElementById('main-site').style.display = 'block';
       window.scrollTo(0,0);
     }
@@ -1136,64 +1186,18 @@ footer {
 <!-- SUBPAGE: CEDAR DUSK                         -->
 <!-- ═══════════════════════════════════════════ -->
 <div class="subpage" id="page-cedar-dusk" style="display:none;">
-  <style>
-    .sp-nav { position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:28px 72px;background:linear-gradient(to bottom,rgba(5,5,5,0.97),transparent); }
-    .sp-back { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .3s;cursor:none; }
-    .sp-back:hover { color:#c89b3c; }
-    .sp-back::before { content:'←'; font-size:14px; }
-    .sp-logo { font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:5px;color:var(--cream);text-decoration:none; }
-    .sp-hero { min-height:70vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 72px 90px;position:relative;overflow:hidden; }
-    .sp-hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(200,155,60,0.06) 0%,transparent 60%);pointer-events:none; }
-    .sp-num { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#c89b3c;margin-bottom:24px;display:block; }
-    .sp-title { font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,12vw,140px);line-height:.85;letter-spacing:2px;color:var(--cream);margin-bottom:32px; }
-    .sp-tagline { font-size:22px;font-style:italic;color:var(--faint);max-width:520px;line-height:1.7;margin-bottom:48px; }
-    .sp-price-row { display:flex;align-items:center;gap:32px; }
-    .sp-price { font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:2px;color:#c89b3c; }
-    .sp-type { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted); }
-    .sp-buy { font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:#111;background:#c89b3c;padding:14px 36px;text-decoration:none;display:inline-block;transition:background .3s;cursor:none;border:none; }
-    .sp-buy:hover { background:var(--cream); }
-    .sp-body { max-width:1320px;margin:0 auto;padding:100px 72px; }
-    .sp-grid { display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:100px; }
-    .sp-section-label { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#c89b3c;display:block;margin-bottom:20px; }
-    .sp-section-title { font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;color:var(--cream);line-height:.9;margin-bottom:32px; }
-    .sp-mood { font-size:19px;line-height:1.9;color:var(--faint);font-style:italic; }
-    .sp-layers { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px; }
-    .sp-layer-title { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px; }
-    .sp-layer-title::before { content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0; }
-    .sp-layer-top .sp-layer-title { color:rgba(220,205,145,0.8); }
-    .sp-layer-top .sp-layer-title::before { background:rgba(220,205,145,0.7); }
-    .sp-layer-mid .sp-layer-title { color:#c89b3c; }
-    .sp-layer-mid .sp-layer-title::before { background:#c89b3c; }
-    .sp-layer-base .sp-layer-title { color:rgba(155,100,46,0.9); }
-    .sp-layer-base .sp-layer-title::before { background:rgba(155,100,46,0.85); }
-    .sp-layer-items { list-style:none;display:flex;flex-direction:column;gap:10px; }
-    .sp-layer-items li { font-size:15px;font-style:italic;color:var(--faint);line-height:1.4; }
-    .sp-divider { width:100%;height:1px;background:linear-gradient(to right,transparent,rgba(200,155,60,0.15),transparent);margin:0 0 80px; }
-    .sp-notes { }
-    .sp-note { padding:28px 0;border-bottom:1px solid rgba(200,155,60,0.07); }
-    .sp-note-title { font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:var(--cream);margin-bottom:8px; }
-    .sp-note-body { font-size:14px;line-height:1.75;color:#b8a888;font-style:italic;white-space:pre-line; }
-    .sp-note-tag { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c89b3c;border:1px solid rgba(200,155,60,0.2);padding:4px 10px;display:inline-block;margin-top:12px; }
-    @media(max-width:960px){
-      .sp-nav{ padding:20px 24px; }
-      .sp-hero{ padding:0 24px 70px; }
-      .sp-body{ padding:70px 24px; }
-      .sp-grid{ grid-template-columns:1fr;gap:52px; }
-      .sp-layers{ grid-template-columns:1fr;gap:20px; }
-      .sp-price-row{ flex-wrap:wrap;gap:16px; }
-    }
-  </style>
+
 
   <nav class="sp-nav">
-    <a href="#" class="sp-back" data-back>The Collection</a>
-    <a href="#" class="sp-logo" data-back>LUCKY OBSCURA</a>
+    <a href="javascript:void(0)" class="sp-back" data-back>← The Collection</a>
+    <a href="javascript:void(0)" class="sp-logo" data-back>LUCKY OBSCURA</a>
   </nav>
 
   <div class="sp-hero">
     <div class="sp-hero-bg"></div>
-    <span class="sp-num">Obscura No. 01</span>
-    <h1 class="sp-title">CEDAR<br>DUSK</h1>
-    <p class="sp-tagline">Cold wood. Iron light. A low amber burning.</p>
+    <span class="sp-num">Motion 01</span>
+    <h1 class="sp-title">Cold<br>Current</h1>
+    <p class="sp-tagline">Cold air moving through steel and water.</p>
     <div class="sp-price-row">
       <span class="sp-price">45 €</span>
       <span class="sp-type">Extrait de Parfum · 30ml</span>
@@ -1206,7 +1210,7 @@ footer {
       <div>
         <span class="sp-section-label">The composition</span>
         <h2 class="sp-section-title">MOOD &amp;<br>CHARACTER</h2>
-        <p class="sp-mood">Cedar Dusk opens with a sharp, mineral dryness — Iso E Super at controlled concentration, enough to project without dominating. The cedarwood arrives mid-wear, grounded and slightly smoky through the guaiacwood accord. Vetiver pulls the base into earth and shadow. The amber glow is restrained. It never sweetens. It only deepens.</p>
+        <p class="sp-mood">Cold Current opens dry and mineral. Iso E Super at a controlled concentration — present without dominating. Cedarwood arrives mid-wear, grounded and slightly smoky through the guaiacwood accord. Vetiver pulls the base into shadow. It never sweetens. It only deepens.</p>
       </div>
       <div>
         <span class="sp-section-label">Ingredients</span>
@@ -1215,8 +1219,8 @@ footer {
           <div class="sp-layer-top">
             <div class="sp-layer-title">Top</div>
             <ul class="sp-layer-items">
-              <li>Iso E Super</li>
               <li>Black Pepper</li>
+              <li>Mineral Accord</li>
             </ul>
           </div>
           <div class="sp-layer-mid">
@@ -1230,7 +1234,7 @@ footer {
             <div class="sp-layer-title">Base</div>
             <ul class="sp-layer-items">
               <li>Vetiver</li>
-              <li>Galaxolide</li>
+              <li>Clean Musk</li>
             </ul>
           </div>
         </div>
@@ -1243,18 +1247,13 @@ footer {
     <h2 class="sp-section-title">DEVELOPMENT<br>NOTES</h2>
     <div class="sp-notes">
       <div class="sp-note">
-        <div class="sp-note-title">CEDAR-VETIVER ACCORD — CV-03</div>
-        <p class="sp-note-body">Cedarwood Virginia with vetiver bourbon.
-Iso E Super introduced at 15% — smoky diffusion without aggression.
-→ Foundation for Cedar Dusk.</p>
+        <div class="sp-note-title">Cedar-Vetiver Accord — CV-03</div>
+        <p class="sp-note-body">Iso E Super at 15%. Smoky without aggression.<br>→ Foundation for Cold Current.</p>
         <span class="sp-note-tag">Accord Development</span>
       </div>
       <div class="sp-note">
-        <div class="sp-note-title">ISO E SUPER — CONCENTRATION STUDY</div>
-        <p class="sp-note-body">Tested at 5%, 10%, 20% in alcohol on strips.
-5%: almost imperceptible. 10%: clean balance, good projection.
-20%: overpowers, headache-inducing.
-→ 10% ceiling for Cedar Dusk.</p>
+        <div class="sp-note-title">Iso E Super — Concentration Study</div>
+        <p class="sp-note-body">5%: imperceptible. 10%: balanced. 20%: aggressive.<br>→ Ceiling set at 10%.</p>
         <span class="sp-note-tag">Material Study</span>
       </div>
     </div>
@@ -1266,15 +1265,15 @@ Iso E Super introduced at 15% — smoky diffusion without aggression.
 <!-- ═══════════════════════════════════════════ -->
 <div class="subpage" id="page-noir-petale" style="display:none;">
   <nav class="sp-nav">
-    <a href="#" class="sp-back" data-back>The Collection</a>
-    <a href="#" class="sp-logo" data-back>LUCKY OBSCURA</a>
+    <a href="javascript:void(0)" class="sp-back" data-back>← The Collection</a>
+    <a href="javascript:void(0)" class="sp-logo" data-back>LUCKY OBSCURA</a>
   </nav>
 
   <div class="sp-hero">
     <div class="sp-hero-bg" style="background:radial-gradient(ellipse at 70% 50%,rgba(200,155,60,0.05) 0%,transparent 60%);"></div>
-    <span class="sp-num">Obscura No. 02</span>
-    <h1 class="sp-title">NOIR<br>PÉTALE</h1>
-    <p class="sp-tagline">Petals pressed in dark resin. Still. Unresolved.</p>
+    <span class="sp-num">Daylight 01</span>
+    <h1 class="sp-title">White<br>Corridor</h1>
+    <p class="sp-tagline">Bleached light on pale stone. Distance without warmth.</p>
     <div class="sp-price-row">
       <span class="sp-price">45 €</span>
       <span class="sp-type">Extrait de Parfum · 30ml</span>
@@ -1287,7 +1286,7 @@ Iso E Super introduced at 15% — smoky diffusion without aggression.
       <div>
         <span class="sp-section-label">The composition</span>
         <h2 class="sp-section-title">MOOD &amp;<br>CHARACTER</h2>
-        <p class="sp-mood">Noir Pétale is a floral that refuses to be soft. Hedione opens it with a transparent, jasmine-like lift — then rose absolute arrives, dark and waxy rather than fresh. Geranium adds an unexpected green edge. The base is amber built from labdanum and benzoin: resinous, warm, slow to fade. This is a floral for people who don't usually wear florals.</p>
+        <p class="sp-mood">White Corridor is a floral that refuses to be soft. Hedione opens with a transparent, jasmine-like lift — then rose absolute arrives, dark and waxy rather than fresh. Geranium adds an unexpected green edge. The base is amber built from labdanum and benzoin: resinous, warm, slow to fade.</p>
       </div>
       <div>
         <span class="sp-section-label">Ingredients</span>
@@ -1296,14 +1295,14 @@ Iso E Super introduced at 15% — smoky diffusion without aggression.
           <div class="sp-layer-top">
             <div class="sp-layer-title">Top</div>
             <ul class="sp-layer-items">
-              <li>Hedione</li>
               <li>Bergamot</li>
+              <li>White Florals</li>
             </ul>
           </div>
           <div class="sp-layer-mid">
             <div class="sp-layer-title">Heart</div>
             <ul class="sp-layer-items">
-              <li>Rose Absolute</li>
+              <li>Rose</li>
               <li>Geranium</li>
             </ul>
           </div>
@@ -1324,18 +1323,13 @@ Iso E Super introduced at 15% — smoky diffusion without aggression.
     <h2 class="sp-section-title">DEVELOPMENT<br>NOTES</h2>
     <div class="sp-notes">
       <div class="sp-note">
-        <div class="sp-note-title">DARK FLORAL — NP-02</div>
-        <p class="sp-note-body">Rose absolute + patchouli + trace oud.
-Very dark floral profile. Oud pulls masculine above 3%.
-Hedione at 8% lifts without sweetening.
-→ Confirmed direction for Noir Pétale.</p>
+        <div class="sp-note-title">Dark Floral — NP-02</div>
+        <p class="sp-note-body">Rose absolute. Oud above 3% pulls too masculine.<br>→ Confirmed direction for White Corridor.</p>
         <span class="sp-note-tag">Development</span>
       </div>
       <div class="sp-note">
-        <div class="sp-note-title">AMBER STRUCTURE — AS-02</div>
-        <p class="sp-note-body">Ambroxan, labdanum, and benzoin tested in three ratios.
-Version B produced the smoothest drydown.
-→ Possible base for Noir Pétale and Series II.</p>
+        <div class="sp-note-title">Amber Structure — AS-02</div>
+        <p class="sp-note-body">Ambroxan, labdanum, benzoin. Version B: smoothest drydown.<br>→ Base for White Corridor and Series II.</p>
         <span class="sp-note-tag">Base Accord</span>
       </div>
     </div>
@@ -1347,15 +1341,15 @@ Version B produced the smoothest drydown.
 <!-- ═══════════════════════════════════════════ -->
 <div class="subpage" id="page-quiet-projection" style="display:none;">
   <nav class="sp-nav">
-    <a href="#" class="sp-back" data-back>The Collection</a>
-    <a href="#" class="sp-logo" data-back>LUCKY OBSCURA</a>
+    <a href="javascript:void(0)" class="sp-back" data-back>← The Collection</a>
+    <a href="javascript:void(0)" class="sp-logo" data-back>LUCKY OBSCURA</a>
   </nav>
 
   <div class="sp-hero">
     <div class="sp-hero-bg" style="background:radial-gradient(ellipse at 50% 40%,rgba(200,155,60,0.05) 0%,transparent 55%);"></div>
-    <span class="sp-num">Obscura No. 03</span>
-    <h1 class="sp-title">QUIET<br>PROJECTION</h1>
-    <p class="sp-tagline">Daylight through glass. Something moving in still air.</p>
+    <span class="sp-num">Nocturne 01</span>
+    <h1 class="sp-title">Velvet<br>Smoke</h1>
+    <p class="sp-tagline">Smoke before sleep. The hour before nothing.</p>
     <div class="sp-price-row">
       <span class="sp-price">45 €</span>
       <span class="sp-type">Extrait de Parfum · 30ml</span>
@@ -1368,7 +1362,7 @@ Version B produced the smoothest drydown.
       <div>
         <span class="sp-section-label">The composition</span>
         <h2 class="sp-section-title">MOOD &amp;<br>CHARACTER</h2>
-        <p class="sp-mood">Quiet Projection opens bright — bergamot and grapefruit, clean and immediate. Then Hedione takes over: a transparent, weightless quality that diffuses into the air rather than sitting on skin. Iso E Super adds a woody shimmer in the heart. Ambroxan in the base gives it staying power without heaviness. This is the lightest composition in Series I. Effortless to wear. Harder to stop noticing.</p>
+        <p class="sp-mood">Velvet Smoke opens with bergamot and grapefruit — clean and immediate. Hedione takes over: transparent, weightless, diffusing into air rather than settling on skin. Ambroxan in the base gives it staying power without heaviness. The lightest structure in Series I. Harder to stop noticing than it first appears.</p>
       </div>
       <div>
         <span class="sp-section-label">Ingredients</span>
@@ -1384,15 +1378,15 @@ Version B produced the smoothest drydown.
           <div class="sp-layer-mid">
             <div class="sp-layer-title">Heart</div>
             <ul class="sp-layer-items">
-              <li>Hedione</li>
-              <li>Iso E Super</li>
+              <li>Soft Cedarwood</li>
+              <li>Smoke</li>
             </ul>
           </div>
           <div class="sp-layer-base">
             <div class="sp-layer-title">Base</div>
             <ul class="sp-layer-items">
-              <li>Ambroxan</li>
-              <li>Habanolide</li>
+              <li>Amber</li>
+              <li>Musk</li>
             </ul>
           </div>
         </div>
@@ -1405,10 +1399,8 @@ Version B produced the smoothest drydown.
     <h2 class="sp-section-title">DEVELOPMENT<br>NOTES</h2>
     <div class="sp-notes">
       <div class="sp-note">
-        <div class="sp-note-title">MINERAL CITRUS STUDY — MC-01</div>
-        <p class="sp-note-body">Bergamot and grapefruit with Calone at trace levels.
-Unexpected lift when Hedione exceeded 20%.
-→ Direction for Quiet Projection.</p>
+        <div class="sp-note-title">Mineral Citrus Study — MC-01</div>
+        <p class="sp-note-body">Hedione above 20% — unexpected lift.<br>→ Direction for Velvet Smoke.</p>
         <span class="sp-note-tag">Material Study</span>
       </div>
     </div>
