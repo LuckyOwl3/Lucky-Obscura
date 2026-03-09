@@ -27,13 +27,14 @@ body {
   background: radial-gradient(circle at top, #111111 0%, #050505 100%);
   color: var(--cream);
   font-family: 'Cormorant Garamond', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   cursor: none;
 }
 
 /* ── CURSOR ── */
-.cursor      { width:5px;height:5px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%); }
-.cursor-ring { width:26px;height:26px;border:1px solid rgba(200,155,60,0.3);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s; }
+.cursor { width:1px;height:1px;background:rgba(200,155,60,0.8);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%); }
+.cursor-ring { display:none; }
 
 /* ── GRAIN ── */
 body::after {
@@ -52,7 +53,7 @@ nav {
 .nav-logo { text-decoration:none;display:flex;flex-direction:column;align-items:flex-start;gap:3px; }
 .nav-logo-mark { font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:400;letter-spacing:6px;color:#c89b3c;line-height:1; }
 .nav-logo-rule { width:24px;height:1px;background:rgba(200,155,60,0.6); }
-.nav-logo-name { font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:5px;color:var(--cream);line-height:1; }
+.nav-logo-name { font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;letter-spacing:5px;color:var(--cream);line-height:1;text-transform:uppercase; }
 .nav-links { display:flex;gap:48px;list-style:none; }
 .nav-links a { font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:#a89478;text-decoration:none;transition:color .3s; }
 .nav-links a:hover { color:var(--cream); }
@@ -106,8 +107,8 @@ nav {
   transform: translate(-50%, -50%);
   width: 420px;
   height: 420px;
-  background: radial-gradient(circle, rgba(200,155,60,0.13) 0%, transparent 70%);
-  filter: blur(70px);
+  background: radial-gradient(circle, rgba(200,155,60,0.07) 0%, transparent 70%);
+  filter: blur(80px);
   z-index: -1;
   pointer-events: none;
 }
@@ -121,9 +122,10 @@ nav {
   text-indent: 36px;
 }
 .hero-lo-rule {
-  width: 60px;
+  width: 48px;
   height: 1px;
-  background: rgba(200,155,60,0.45);
+  background: rgba(200,155,60,0.35);
+  margin-top: 4px;
 }
 
 .hero-wordmark {
@@ -157,21 +159,25 @@ nav {
   animation: fadeUp 1s ease .65s forwards;
 }
 .hero-body {
-  font-size: 19px;
-  line-height: 1.85;
+  font-size: 26px;
+  line-height: 1.5;
   font-style: italic;
-  color: var(--faint);
-  max-width: 480px;
+  color: var(--cream);
+  max-width: 420px;
+  font-weight: 300;
+  letter-spacing: .5px;
   opacity: 0;
   animation: fadeUp .9s ease .7s forwards;
 }
 .hero-body-small {
-  font-size: 16px;
-  line-height: 1.75;
-  font-style: italic;
+  font-size: 14px;
+  line-height: 1.8;
+  font-style: normal;
+  font-family: "Courier Prime", monospace;
+  letter-spacing: 1px;
   color: var(--faint2);
-  max-width: 420px;
-  margin-top: 14px;
+  max-width: 380px;
+  margin-top: 20px;
   opacity: 0;
   animation: fadeUp .9s ease .82s forwards;
 }
@@ -206,14 +212,24 @@ nav {
 /* ── SHARED ── */
 .section-label {
   font-family:'Courier Prime',monospace;
-  font-size:10px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--accent);display:block;margin-bottom:16px;
+  font-size:8.5px;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(200,155,60,0.6);display:block;margin-bottom:20px;
+}
+
+/* ── TITLE UNDERLINE DETAIL ── */
+.title-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: #c89b3c;
+  margin: 20px 0 36px;
+  opacity: 0.6;
 }
 
 /* ── COLLECTION ── */
-.collection { padding:150px 72px;max-width:1320px;margin:0 auto; }
-.collection-header { margin-bottom:90px; }
-.collection-title { font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:2px;color:var(--cream);line-height:.9;margin-bottom:28px; }
+.collection { padding:180px 72px;max-width:1320px;margin:0 auto; }
+.collection-header { margin-bottom:80px;max-width:560px; }
+.collection-title { font-family:'Cormorant Garamond',serif;font-size:88px;font-weight:300;letter-spacing:5px;color:var(--cream);line-height:.85;margin-bottom:0; }
 .collection-intro { font-size:17px;line-height:1.8;color:var(--faint);font-style:italic;max-width:460px; }
 
 .scent-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:2px; }
@@ -221,9 +237,9 @@ nav {
 .scent-card {
   background:var(--dark);
   border:1px solid rgba(200,155,60,0);
-  padding:52px 44px;
+  padding:64px 52px;
   position:relative;overflow:hidden;
-  transition:border-color .5s,background .5s;
+  transition:border-color .6s,background .6s;
   cursor:none;
 }
 .scent-card:hover { border-color:rgba(200,155,60,0.18);background:var(--fog); }
@@ -233,12 +249,13 @@ nav {
   opacity:0;transition:opacity .5s;
 }
 .scent-card:hover::before { opacity:1; }
+.scent-card:hover::after { content:''; }
 
-.scent-num { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;color:var(--accent-dim);margin-bottom:32px;display:block; }
-.scent-name { font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:var(--cream);line-height:1;margin-bottom:8px; }
-.scent-sub { font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:1px;color:var(--accent);font-style:italic;margin-bottom:28px; }
-.scent-desc { font-size:16px;line-height:1.75;color:var(--faint);font-style:italic;margin-bottom:36px; }
-.scent-materials { display:flex;flex-wrap:wrap;gap:6px;margin-bottom:36px; }
+.scent-num { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:4px;color:rgba(200,155,60,0.45);margin-bottom:20px;display:block;text-transform:uppercase; }
+.scent-name { font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;letter-spacing:4px;color:var(--cream);line-height:1;margin-bottom:16px; }
+.scent-sub { font-family:'Cormorant Garamond',serif;font-size:17px;letter-spacing:.5px;color:var(--faint);font-style:italic;margin-bottom:40px;line-height:1.6; }
+.scent-desc { display:none; }
+.scent-materials { display:none; }
 .scent-material {
   font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:1.5px;
   text-transform:uppercase;color:var(--muted);
@@ -259,30 +276,107 @@ nav {
 .layer-items { list-style:none;display:flex;flex-direction:column;gap:5px; }
 .layer-items li { font-size:13px;font-style:italic;color:var(--faint2);line-height:1.4; }
 
-.scent-type { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(106,96,80,0.6);margin-top:28px;display:block; }
+.scent-type { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,155,60,0.45);margin-top:36px;padding-top:28px;border-top:1px solid rgba(200,155,60,0.08);display:block; }
+
+.collection-lines { display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(200,155,60,0.08);margin-bottom:90px; }
+.collection-line { padding:28px 0;border-right:1px solid rgba(200,155,60,0.08);padding-right:32px;margin-right:32px; }
+.collection-line:last-child { border-right:none; }
+.collection-line.cl-inactive { opacity:0.35; }
+.cl-name { font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:3px;color:var(--cream);display:block;margin-bottom:6px; }
+.cl-desc { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block; }
+
+/* ── DISCOVERY SET ── */
+.discovery { padding:180px 72px;max-width:1320px;margin:0 auto; }
+.discovery-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  align-items: center;
+}
+.discovery-left {}
+.discovery-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.discovery-card {
+  background: var(--dark);
+  border: 1px solid rgba(200,155,60,0.12);
+  padding: 60px 56px;
+  position: relative;
+  width: 100%;
+}
+.discovery-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(200,155,60,0.4), transparent);
+}
+.discovery-label { font-family:'Courier Prime',monospace;font-size:8.5px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,155,60,0.6);display:block;margin-bottom:32px; }
+.discovery-title { font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:6px; }
+.discovery-brand { font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;letter-spacing:6px;color:var(--cream);margin-bottom:48px;display:block; }
+.discovery-scents { list-style:none;margin-bottom:44px;display:flex;flex-direction:column;gap:0; }
+.discovery-scent {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(200,155,60,0.06);
+}
+.discovery-scent:first-child { border-top: 1px solid rgba(200,155,60,0.06); }
+.discovery-scent-name { font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:2px;color:var(--cream); }
+.discovery-scent-code { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,155,60,0.45); }
+.discovery-footer { display:flex;align-items:baseline;justify-content:space-between;padding-top:32px; }
+.discovery-size { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted); }
+.discovery-price { font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;letter-spacing:2px;color:#c89b3c; }
+.discovery-price sup { font-size:20px;vertical-align:super; }
+.discovery-btn {
+  margin-top:36px;
+  font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;
+  text-transform:uppercase;color:#111;background:#c89b3c;
+  padding:15px 40px;text-decoration:none;display:inline-block;
+  transition:background .3s;cursor:none;border:none;
+  align-self: flex-start;
+}
+.discovery-btn:hover { background:var(--cream); }
+
+.discovery-text { }
+.discovery-heading { font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;letter-spacing:4px;line-height:.95;color:var(--cream);margin-bottom:24px; }
+.discovery-heading span { color:var(--accent); }
+.discovery-rule { width:40px;height:1px;background:rgba(200,155,60,0.5);margin-bottom:32px; }
+.discovery-desc { font-size:19px;font-style:italic;line-height:1.85;color:var(--faint);max-width:380px;margin-bottom:24px; }
+.discovery-note { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);line-height:1.9; }
+
+@media(max-width:960px){
+  .discovery{ padding:110px 24px; }
+  .discovery-inner{ grid-template-columns:1fr;gap:56px; }
+  .discovery-heading{ font-size:48px; }
+  .discovery-card{ padding:44px 32px; }
+}
 
 /* ── PROMISE STRIP ── */
 .promise-strip { background:var(--accent);padding:16px 0;overflow:hidden; }
-.promise-track { display:flex;white-space:nowrap;animation:marquee 18s linear infinite; }
-.promise-item { font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:4px;color:#111;padding:0 52px;display:flex;align-items:center;gap:32px;flex-shrink:0; }
+.promise-track { display:flex;white-space:nowrap;animation:marquee 26s linear infinite; }
+.promise-item { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(10,8,6,0.8);padding:0 48px;display:flex;align-items:center;gap:24px;flex-shrink:0; }
 .promise-item::after { content:'◆';font-size:7px; }
 
 /* ── LABORATORY ── */
-.lab { background:var(--dark);padding:150px 72px; }
+.lab { background:var(--dark);padding:180px 72px; }
 .lab-inner { max-width:1100px;margin:0 auto; }
-.lab-head { display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:52px;border-bottom:1px solid rgba(200,155,60,0.1);margin-bottom:0; }
-.lab-title { font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:2px;color:var(--cream);line-height:.9; }
-.lab-intro { font-size:15px;line-height:1.75;color:var(--faint);font-style:italic;max-width:260px;text-align:right; }
+.lab-head { display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:60px;border-bottom:1px solid rgba(200,155,60,0.08);margin-bottom:0; }
+.lab-title { font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;letter-spacing:4px;color:var(--cream);line-height:.85; }
+.lab-intro { font-size:14px;line-height:1.8;color:var(--faint2);font-style:italic;max-width:240px;text-align:right; }
 
-.note { display:grid;grid-template-columns:110px 1fr auto;gap:52px;align-items:start;padding:36px 0;border-bottom:1px solid rgba(200,155,60,0.06);transition:padding-left .3s; }
+.note { display:grid;grid-template-columns:110px 1fr auto;gap:52px;align-items:start;padding:44px 0;border-bottom:1px solid rgba(200,155,60,0.05);transition:padding-left .4s; }
 .note:hover { padding-left:10px; }
 .note-date { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;color:var(--accent-dim);padding-top:3px;line-height:1.6; }
-.note-title { font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1.5px;color:var(--cream);margin-bottom:10px; }
+.note-title { font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;letter-spacing:3px;color:var(--cream);margin-bottom:10px;text-transform:uppercase; }
 .note-body { font-size:14px;line-height:1.75;color:#b8a888;font-style:italic;white-space:pre-line; }
 .note-tag { font-family:'Courier Prime',monospace;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(200,155,60,0.22);padding:5px 10px;white-space:nowrap;flex-shrink:0;margin-top:3px; }
 
 /* ── PERFUMER ── */
-.perfumer { padding:150px 72px;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:110px;align-items:center; }
+.perfumer { padding:180px 72px;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:110px;align-items:center; }
 .perfumer-portrait {
   aspect-ratio:3/4;background:var(--dark);
   border:1px solid rgba(200,155,60,0.1);
@@ -303,8 +397,8 @@ nav {
 }
 
 .perfumer-heading {
-  font-family:'Bebas Neue',sans-serif;font-size:58px;
-  letter-spacing:2px;line-height:.95;color:var(--cream);margin-bottom:40px;
+  font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;
+  letter-spacing:5px;line-height:.9;color:var(--cream);margin-bottom:40px;
 }
 .perfumer-text { font-size:19px;line-height:1.9;color:var(--faint);margin-bottom:20px; }
 .perfumer-text em { color:var(--accent);font-style:italic; }
@@ -324,12 +418,12 @@ footer {
 .footer-lo-mark { display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:14px; }
 .footer-lo-letters { font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;letter-spacing:6px;color:#c89b3c;line-height:1; }
 .footer-lo-rule { width:30px;height:1px;background:rgba(200,155,60,0.6); }
-.footer-name { font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:5px;color:var(--cream);margin-bottom:14px; }
+.footer-name { font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:7px;text-transform:uppercase;color:var(--cream);margin-bottom:14px; }
 .footer-name span { color:var(--accent); }
 .footer-tagline { font-size:15px;color:#c8b89a;font-style:italic;line-height:1.7;max-width:240px; }
 .footer-col-label { font-family:'Courier Prime',monospace;font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:block; }
 .footer-links { list-style:none;display:flex;flex-direction:column;gap:14px; }
-.footer-links a { font-size:15px;color:#c8b89a;text-decoration:none;transition:color .3s;letter-spacing:.3px; }
+.footer-links a { font-family:'Cormorant Garamond',serif;font-size:16px;color:#c8b89a;text-decoration:none;transition:color .3s;letter-spacing:1px;font-style:italic; }
 .footer-links a:hover { color:var(--cream); }
 .footer-bottom {
   border-top:1px solid rgba(200,155,60,0.07);padding-top:32px;
@@ -340,7 +434,7 @@ footer {
 
 /* ── MATERIAL PHILOSOPHY ── */
 .materials {
-  padding: 150px 72px;
+  padding: 180px 72px;
   position: relative;
   overflow: hidden;
 }
@@ -364,9 +458,10 @@ footer {
   top: 120px;
 }
 .materials-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 88px;
-  letter-spacing: 3px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 96px;
+  font-weight: 300;
+  letter-spacing: 6px;
   line-height: .85;
   color: var(--cream);
   margin-bottom: 32px;
@@ -445,7 +540,8 @@ footer {
   .materials { padding: 80px 24px; }
   .materials-inner { grid-template-columns: 1fr; gap: 48px; }
   .materials-left { position: static; }
-  .materials-title { font-size: 64px; }
+  .collection-lines { grid-template-columns:1fr 1fr;gap:0; }
+  .materials-title { font-size:64px; }
 }
 
 /* ── HAMBURGER ── */
@@ -524,20 +620,20 @@ footer {
   .btn-solid, .btn-outline{ width:100%; text-align:center; padding:16px 24px; }
 
   /* Collection */
-  .collection{ padding:90px 24px; }
+  .collection{ padding:110px 24px; }
   .scent-grid{ grid-template-columns:1fr; gap:1px; }
   .scent-card{ padding:40px 28px; }
   .scent-layers{ grid-template-columns:1fr; gap:20px; border-top:none; padding-top:0; }
 
   /* Materials */
-  .materials{ padding:90px 24px; }
+  .materials{ padding:110px 24px; }
   .materials-inner{ grid-template-columns:1fr; gap:40px; }
   .materials-left{ position:static; }
   .materials-title{ font-size:56px; }
   .materials-para{ font-size:18px; }
 
   /* Lab */
-  .lab{ padding:90px 24px; }
+  .lab{ padding:110px 24px; }
   .lab-head{ flex-direction:column; gap:20px; align-items:flex-start; }
   .lab-intro{ text-align:left; max-width:100%; }
   .note{ grid-template-columns:1fr; gap:12px; padding:28px 0; }
@@ -545,7 +641,7 @@ footer {
   .note-tag{ align-self:flex-start; }
 
   /* Perfumer */
-  .perfumer{ padding:90px 24px; grid-template-columns:1fr; gap:48px; }
+  .perfumer{ padding:110px 24px; grid-template-columns:1fr; gap:48px; }
   .perfumer-portrait{ order:-1; aspect-ratio:4/5; }
   .perfumer-heading{ font-size:44px; }
   .perfumer-text{ font-size:17px; }
@@ -571,6 +667,7 @@ footer {
   </a>
   <ul class="nav-links">
     <li><a href="#collection">Collection</a></li>
+    <li><a href="#discovery">Discovery Set</a></li>
     <li><a href="#laboratory">Laboratory</a></li>
     <li><a href="#perfumer">The Perfumer</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -584,6 +681,8 @@ footer {
 <div class="nav-drawer" id="drawer">
   <a href="#collection" class="drawer-link">Collection</a>
   <div class="nav-drawer-rule"></div>
+  <a href="#discovery" class="drawer-link">Discovery Set</a>
+  <div class="nav-drawer-rule"></div>
   <a href="#laboratory" class="drawer-link">Laboratory</a>
   <div class="nav-drawer-rule"></div>
   <a href="#materials" class="drawer-link">Materials</a>
@@ -592,6 +691,8 @@ footer {
   <div class="nav-drawer-rule"></div>
   <a href="#contact" class="drawer-link">Contact</a>
 </div>
+
+<div id="main-site">
 
 <!-- HERO -->
 <section class="hero">
@@ -605,11 +706,10 @@ footer {
   </div>
 
   <h1 class="hero-wordmark">LUCKY OBSCURA</h1>
-  <p class="hero-sub">Independent Perfumery Studio</p>
-  <p class="hero-location">Ljubljana — Slovenia</p>
+  <p class="hero-sub">Niche Perfumery · Ljubljana, Slovenia</p>
 
-  <p class="hero-body">Compositions developed slowly through structure, balance, and restraint.</p>
-  <p class="hero-body-small">Each fragrance begins as an experiment — refined until only the essential remains.</p>
+  <p class="hero-body">Fragrance as architecture.</p>
+  <p class="hero-body-small">Studied, reduced, resolved.</p>
 
   <div class="hero-cta">
     <a href="#collection" class="btn-solid">View the Collection</a>
@@ -623,23 +723,25 @@ footer {
 <section id="collection">
   <div class="collection">
     <div class="collection-header reveal">
-      <span class="section-label">Series I</span>
-      <h2 class="collection-title">THREE<br>COMPOSITIONS</h2>
-      <p class="collection-intro">A small series of compositions exploring contrast, diffusion, and texture. Each edition is produced in limited batches.</p>
+      <span class="section-label">Series I — 2025</span>
+      <h2 class="collection-title">The<br>Collection</h2>
+      <span class="title-rule"></span>
+      <p class="collection-intro">Four collections. Each one a separate study in atmosphere, material, and restraint.</p>
+    </div>
+    <div class="collection-lines reveal">
+      <div class="collection-line"><span class="cl-name">Motion</span><span class="cl-desc">Movement, velocity, mineral air</span></div>
+      <div class="collection-line"><span class="cl-name">Daylight</span><span class="cl-desc">Clarity, pale space, cool surfaces</span></div>
+      <div class="collection-line"><span class="cl-name">Nocturne</span><span class="cl-desc">Weight, smoke, the late hours</span></div>
+      <div class="collection-line cl-inactive"><span class="cl-name">Obscura Editions</span><span class="cl-desc">Forthcoming</span></div>
     </div>
 
     <div class="scent-grid">
 
       <!-- No. 01 -->
-      <div class="scent-card reveal">
-        <span class="scent-num">Obscura No. 01</span>
-        <div class="scent-name">CEDAR DUSK</div>
-        <div class="scent-sub">Dry woods and mineral air, softened by a quiet amber glow.</div>
-        <div class="scent-materials">
-          <span class="scent-material">Cedarwood</span>
-          <span class="scent-material">Iso E Super</span>
-          <span class="scent-material">Vetiver</span>
-        </div>
+      <div class="scent-card reveal" data-page="cedar-dusk" style="cursor:pointer;">
+        <span class="scent-num">Motion 01</span>
+        <div class="scent-name">Cold Current</div>
+        <div class="scent-sub">Cold air moving through steel and water.</div>
         <div class="scent-layers">
           <div class="layer top">
             <div class="layer-label">Top</div>
@@ -663,19 +765,14 @@ footer {
             </ul>
           </div>
         </div>
-        <span class="scent-type">Extrait de Parfum · £28</span>
+        <span class="scent-type">Extrait de Parfum · 45 €</span>
       </div>
 
       <!-- No. 02 -->
-      <div class="scent-card reveal">
-        <span class="scent-num">Obscura No. 02</span>
-        <div class="scent-name">NOIR PÉTALE</div>
-        <div class="scent-sub">Dark florals suspended in shadowed amber.</div>
-        <div class="scent-materials">
-          <span class="scent-material">Rose</span>
-          <span class="scent-material">Labdanum</span>
-          <span class="scent-material">Benzoin</span>
-        </div>
+      <div class="scent-card reveal" data-page="noir-petale" style="cursor:pointer;">
+        <span class="scent-num">Daylight 01</span>
+        <div class="scent-name">White Corridor</div>
+        <div class="scent-sub">Bleached light on pale stone. Distance without warmth.</div>
         <div class="scent-layers">
           <div class="layer top">
             <div class="layer-label">Top</div>
@@ -699,19 +796,14 @@ footer {
             </ul>
           </div>
         </div>
-        <span class="scent-type">Extrait de Parfum · £32</span>
+        <span class="scent-type">Extrait de Parfum · 45 €</span>
       </div>
 
       <!-- No. 03 -->
-      <div class="scent-card reveal">
-        <span class="scent-num">Obscura No. 03</span>
-        <div class="scent-name">QUIET PROJECTION</div>
-        <div class="scent-sub">Fresh citrus lifted by transparent woods.</div>
-        <div class="scent-materials">
-          <span class="scent-material">Bergamot</span>
-          <span class="scent-material">Hedione</span>
-          <span class="scent-material">Ambroxan</span>
-        </div>
+      <div class="scent-card reveal" data-page="quiet-projection" style="cursor:pointer;">
+        <span class="scent-num">Nocturne 01</span>
+        <div class="scent-name">Velvet Smoke</div>
+        <div class="scent-sub">Smoke before sleep. The hour before nothing.</div>
         <div class="scent-layers">
           <div class="layer top">
             <div class="layer-label">Top</div>
@@ -735,7 +827,7 @@ footer {
             </ul>
           </div>
         </div>
-        <span class="scent-type">Extrait de Parfum · Coming Soon</span>
+        <span class="scent-type">Extrait de Parfum · 45 €</span>
       </div>
 
     </div>
@@ -750,15 +842,14 @@ footer {
 
       <div class="materials-left reveal">
         <span class="section-label">On craft</span>
-        <h2 class="materials-title">MATE<br><span>RIALS</span></h2>
+        <h2 class="materials-title">Raw<br><span>Materials</span></h2>
         <div class="materials-rule"></div>
         <p class="materials-note">Aroma chemicals<br>Natural extracts<br>Structure &amp; diffusion</p>
       </div>
 
       <div class="materials-right">
-        <p class="materials-para reveal"><strong>Perfume is made from materials.</strong></p>
-        <p class="materials-para reveal">Not marketing. Not celebrity campaigns. Not packaging.</p>
-        <p class="materials-para reveal">Each composition begins with raw aroma chemicals and natural extracts.</p>
+        <p class="materials-para reveal"><em>Perfume is chemistry.</em><br>Then it becomes something else.</p>
+        <p class="materials-para reveal">Each composition begins with a single material, studied alone before it meets another.</p>
 
         <div class="materials-chemicals reveal">
           <span class="chem-tag">Cedarwood</span>
@@ -773,9 +864,9 @@ footer {
           <span class="chem-tag">Bergamot</span>
         </div>
 
-        <p class="materials-para reveal">Learning how they interact — how one chemical amplifies another, how concentration shifts character entirely — is the real work of perfumery.</p>
+        <p class="materials-para reveal">Concentration changes character entirely. That is the work.</p>
 
-        <p class="materials-closing reveal">Lucky Obscura is built slowly through experimentation, structure, and curiosity about what scent can become.</p>
+        <p class="materials-closing reveal">Lucky Obscura is built slowly. Nothing is released until it cannot be reduced further.</p>
       </div>
 
     </div>
@@ -783,21 +874,69 @@ footer {
 </section>
 
 
+<div class="section-divider"></div>
+
+<!-- DISCOVERY SET -->
+<section id="discovery">
+  <div class="discovery">
+    <div class="discovery-inner">
+
+      <div class="discovery-text reveal">
+        <span class="section-label">Where to begin</span>
+        <h2 class="discovery-heading">Dis<span>covery</span><br>Set</h2>
+        <div class="discovery-rule"></div>
+        <p class="discovery-desc">Three compositions. Each one different. A way to understand the work before committing to a full bottle.</p>
+        <p class="discovery-note">3 × 5 ml · Extrait de Parfum<br>Presented in a matte black sleeve<br>Limited quantity per month</p>
+      </div>
+
+      <div class="discovery-right reveal">
+        <div class="discovery-card">
+          <span class="discovery-label">Lucky Obscura</span>
+          <div class="discovery-title">Discovery Set</div>
+          <span class="discovery-brand">Series I</span>
+
+          <ul class="discovery-scents">
+            <li class="discovery-scent">
+              <span class="discovery-scent-name">Cold Current</span>
+              <span class="discovery-scent-code">Motion 01</span>
+            </li>
+            <li class="discovery-scent">
+              <span class="discovery-scent-name">White Corridor</span>
+              <span class="discovery-scent-code">Daylight 01</span>
+            </li>
+            <li class="discovery-scent">
+              <span class="discovery-scent-name">Velvet Smoke</span>
+              <span class="discovery-scent-code">Nocturne 01</span>
+            </li>
+          </ul>
+
+          <div class="discovery-footer">
+            <span class="discovery-size">3 × 5 ml</span>
+            <span class="discovery-price"><sup>€</sup>35</span>
+          </div>
+        </div>
+        <a href="#contact" class="discovery-btn">Reserve a Set</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- PROMISE STRIP -->
 <div class="promise-strip">
   <div class="promise-track">
-    <span class="promise-item">Independent perfumery</span>
-    <span class="promise-item">Small batch</span>
-    <span class="promise-item">All materials listed</span>
-    <span class="promise-item">Handmade by Žan</span>
-    <span class="promise-item">Series I</span>
-    <span class="promise-item">Built slowly</span>
-    <span class="promise-item">Independent perfumery</span>
-    <span class="promise-item">Small batch</span>
-    <span class="promise-item">All materials listed</span>
-    <span class="promise-item">Handmade by Žan</span>
-    <span class="promise-item">Series I</span>
-    <span class="promise-item">Built slowly</span>
+    <span class="promise-item">Motion</span>
+    <span class="promise-item">Daylight</span>
+    <span class="promise-item">Nocturne</span>
+    <span class="promise-item">Obscura Editions</span>
+    <span class="promise-item">Ljubljana — Slovenia</span>
+    <span class="promise-item">Series I — 2025</span>
+    <span class="promise-item">Motion</span>
+    <span class="promise-item">Daylight</span>
+    <span class="promise-item">Nocturne</span>
+    <span class="promise-item">Obscura Editions</span>
+    <span class="promise-item">Ljubljana — Slovenia</span>
+    <span class="promise-item">Series I — 2025</span>
   </div>
 </div>
 
@@ -810,18 +949,17 @@ footer {
       <div class="lab-head reveal">
         <div>
           <span class="section-label">Working Notebook</span>
-          <h2 class="lab-title">THE<br>LABORATORY</h2>
+          <h2 class="lab-title">The<br>Laboratory</h2>
+          <span class="title-rule"></span>
         </div>
-        <p class="lab-intro">The place where materials are studied, accords are tested, and compositions evolve. Fragments from the working notebook.</p>
+        <p class="lab-intro">Fragments from the working notebook.</p>
       </div>
 
       <div class="note reveal">
         <div class="note-date">Nov 2024</div>
         <div>
-          <div class="note-title">CEDAR-VETIVER ACCORD — CV-03</div>
-          <p class="note-body">Cedarwood Virginia with vetiver bourbon.
-Iso E Super introduced at 15% — smoky diffusion without aggression.
-→ Foundation for Cedar Dusk.</p>
+          <div class="note-title">Cedar-Vetiver Accord — CV-03</div>
+          <p class="note-body">Iso E Super at 15%. Smoky without aggression.<br>→ Foundation for Cold Current.</p>
         </div>
         <span class="note-tag">Accord Development</span>
       </div>
@@ -829,10 +967,8 @@ Iso E Super introduced at 15% — smoky diffusion without aggression.
       <div class="note reveal">
         <div class="note-date">Dec 2024</div>
         <div>
-          <div class="note-title">MINERAL CITRUS STUDY — MC-01</div>
-          <p class="note-body">Bergamot and grapefruit with Calone at trace levels.
-Unexpected lift when Hedione exceeded 20%.
-→ Direction for Quiet Projection.</p>
+          <div class="note-title">Mineral Citrus Study — MC-01</div>
+          <p class="note-body">Hedione above 20% — unexpected lift.<br>→ Direction for White Corridor.</p>
         </div>
         <span class="note-tag">Material Study</span>
       </div>
@@ -840,11 +976,8 @@ Unexpected lift when Hedione exceeded 20%.
       <div class="note reveal">
         <div class="note-date">Jan 2025</div>
         <div>
-          <div class="note-title">DARK FLORAL — NP-02</div>
-          <p class="note-body">Rose absolute + patchouli + trace oud.
-Very dark floral profile. Oud pulls masculine above 3%.
-Hedione at 8% lifts without sweetening.
-→ Confirmed direction for Noir Pétale.</p>
+          <div class="note-title">Dark Floral — NP-02</div>
+          <p class="note-body">Rose absolute. Oud above 3% pulls too masculine.<br>→ Confirmed direction for Velvet Smoke.</p>
         </div>
         <span class="note-tag">Development</span>
       </div>
@@ -852,12 +985,8 @@ Hedione at 8% lifts without sweetening.
       <div class="note reveal">
         <div class="note-date">Mar 2025</div>
         <div>
-          <div class="note-title">ISO E SUPER — CONCENTRATION STUDY</div>
-          <p class="note-body">Tested at 5%, 10%, 20% in alcohol on strips.
-5%: almost imperceptible.
-10%: clean balance, good projection.
-20%: overpowers, headache-inducing.
-→ 10% ceiling for Cedar Dusk.</p>
+          <div class="note-title">Iso E Super — Concentration Study</div>
+          <p class="note-body">5%: imperceptible. 10%: balanced. 20%: aggressive.<br>→ Ceiling set at 10%.</p>
         </div>
         <span class="note-tag">Material Study</span>
       </div>
@@ -865,10 +994,8 @@ Hedione at 8% lifts without sweetening.
       <div class="note reveal">
         <div class="note-date">May 2025</div>
         <div>
-          <div class="note-title">AMBER STRUCTURE — AS-02</div>
-          <p class="note-body">Ambroxan, labdanum, and benzoin tested in three ratios.
-Version B produced the smoothest drydown.
-→ Possible base for Noir Pétale and Series II.</p>
+          <div class="note-title">Amber Structure — AS-02</div>
+          <p class="note-body">Ambroxan, labdanum, benzoin. Version B: smoothest drydown.<br>→ Base for Velvet Smoke and Series II.</p>
         </div>
         <span class="note-tag">Base Accord</span>
       </div>
@@ -876,11 +1003,8 @@ Version B produced the smoothest drydown.
       <div class="note reveal">
         <div class="note-date">Ongoing</div>
         <div>
-          <div class="note-title">SERIES II — GYM-BL-03 PROTOTYPE</div>
-          <p class="note-body">Too much dihydromyrcenol — metallic, synthetic top.
-Needs more citrus. Bergamot + grapefruit being tested.
-Vetiver base is solid. Top needs 2–3 more iterations.
-→ Not ready.</p>
+          <div class="note-title">Series II — Prototype GYM-BL-03</div>
+          <p class="note-body">Dihydromyrcenol too metallic. Vetiver base is solid.<br>→ Not ready.</p>
         </div>
         <span class="note-tag">Formula</span>
       </div>
@@ -900,9 +1024,10 @@ Vetiver base is solid. Top needs 2–3 more iterations.
     </div>
     <div class="reveal">
       <span class="section-label">The Perfumer</span>
-      <h2 class="perfumer-heading">ŽAN<br>SEDEJ</h2>
-      <p class="perfumer-text">Lucky Obscura was founded by perfumer <em>Žan Sedej</em>. Each fragrance is developed through experimentation with aroma chemicals and natural materials, with a focus on structure, balance, and diffusion.</p>
-      <p class="perfumer-text small">The process is deliberate.<br>Nothing is rushed.</p>
+      <h2 class="perfumer-heading">Žan<br>Sedej</h2>
+      <span class="title-rule"></span>
+      <p class="perfumer-text">Lucky Obscura is the work of <em>Žan Sedej</em> — a self-taught perfumer working from a private studio in Ljubljana.</p>
+      <p class="perfumer-text small">Each composition is developed over months. Resolved or discarded. Nothing in between.</p>
       <div class="perfumer-sig">— Žan</div>
     </div>
   </div>
@@ -917,7 +1042,7 @@ Vetiver base is solid. Top needs 2–3 more iterations.
         <div class="footer-lo-rule"></div>
       </div>
       <div class="footer-name">LUCKY <span>OBSCURA</span></div>
-      <p class="footer-tagline">Independent perfumery.<br>Built slowly.</p>
+      <p class="footer-tagline">Quiet compositions.<br>Ljubljana, Slovenia.</p>
     </div>
     <div>
       <span class="footer-col-label">Navigate</span>
@@ -932,7 +1057,6 @@ Vetiver base is solid. Top needs 2–3 more iterations.
       <span class="footer-col-label">Connect</span>
       <ul class="footer-links">
         <li><a href="#">Instagram</a></li>
-        <li><a href="#">TikTok</a></li>
         <li><a href="#">Email</a></li>
       </ul>
     </div>
@@ -942,6 +1066,8 @@ Vetiver base is solid. Top needs 2–3 more iterations.
     <span class="footer-copy">Series I. More to come.</span>
   </div>
 </footer>
+
+</div><!-- /#main-site -->
 
 <script>
   const burger = document.getElementById('hamburger');
@@ -960,23 +1086,333 @@ Vetiver base is solid. Top needs 2–3 more iterations.
   });
 
   const cursor = document.getElementById('cursor');
-  const ring   = document.getElementById('cursorRing');
-  let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{
-    mx=e.clientX;my=e.clientY;
-    cursor.style.left=mx+'px';cursor.style.top=my+'px';
+    cursor.style.left=e.clientX+'px';
+    cursor.style.top=e.clientY+'px';
   });
-  (function loop(){
-    rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
-    ring.style.left=rx+'px';ring.style.top=ry+'px';
-    requestAnimationFrame(loop);
-  })();
   const io=new IntersectionObserver(entries=>{
     entries.forEach((e,i)=>{
       if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*70);
     });
   },{threshold:.08});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ── SUBPAGE ROUTER ──
+  function showPage(id) {
+    document.getElementById('main-site').style.display = 'none';
+    document.querySelectorAll('.subpage').forEach(p => p.style.display = 'none');
+    if (id) {
+      const page = document.getElementById('page-' + id);
+      if (page) {
+        page.style.display = 'block';
+        page.style.opacity = 0;
+        window.scrollTo(0,0);
+        requestAnimationFrame(() => {
+          page.style.transition = 'opacity .6s ease';
+          page.style.opacity = 1;
+        });
+      }
+    } else {
+      document.getElementById('main-site').style.display = 'block';
+      window.scrollTo(0,0);
+    }
+  }
+
+  document.querySelectorAll('[data-page]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      showPage(el.dataset.page);
+    });
+  });
+  document.querySelectorAll('[data-back]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      showPage(null);
+    });
+  });
 </script>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SUBPAGE: CEDAR DUSK                         -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="subpage" id="page-cedar-dusk" style="display:none;">
+  <style>
+    .sp-nav { position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:28px 72px;background:linear-gradient(to bottom,rgba(5,5,5,0.97),transparent); }
+    .sp-back { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .3s;cursor:none; }
+    .sp-back:hover { color:#c89b3c; }
+    .sp-back::before { content:'←'; font-size:14px; }
+    .sp-logo { font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:5px;color:var(--cream);text-decoration:none; }
+    .sp-hero { min-height:70vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 72px 90px;position:relative;overflow:hidden; }
+    .sp-hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(200,155,60,0.06) 0%,transparent 60%);pointer-events:none; }
+    .sp-num { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#c89b3c;margin-bottom:24px;display:block; }
+    .sp-title { font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,12vw,140px);line-height:.85;letter-spacing:2px;color:var(--cream);margin-bottom:32px; }
+    .sp-tagline { font-size:22px;font-style:italic;color:var(--faint);max-width:520px;line-height:1.7;margin-bottom:48px; }
+    .sp-price-row { display:flex;align-items:center;gap:32px; }
+    .sp-price { font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:2px;color:#c89b3c; }
+    .sp-type { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted); }
+    .sp-buy { font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:#111;background:#c89b3c;padding:14px 36px;text-decoration:none;display:inline-block;transition:background .3s;cursor:none;border:none; }
+    .sp-buy:hover { background:var(--cream); }
+    .sp-body { max-width:1320px;margin:0 auto;padding:100px 72px; }
+    .sp-grid { display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:100px; }
+    .sp-section-label { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#c89b3c;display:block;margin-bottom:20px; }
+    .sp-section-title { font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;color:var(--cream);line-height:.9;margin-bottom:32px; }
+    .sp-mood { font-size:19px;line-height:1.9;color:var(--faint);font-style:italic; }
+    .sp-layers { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px; }
+    .sp-layer-title { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px; }
+    .sp-layer-title::before { content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0; }
+    .sp-layer-top .sp-layer-title { color:rgba(220,205,145,0.8); }
+    .sp-layer-top .sp-layer-title::before { background:rgba(220,205,145,0.7); }
+    .sp-layer-mid .sp-layer-title { color:#c89b3c; }
+    .sp-layer-mid .sp-layer-title::before { background:#c89b3c; }
+    .sp-layer-base .sp-layer-title { color:rgba(155,100,46,0.9); }
+    .sp-layer-base .sp-layer-title::before { background:rgba(155,100,46,0.85); }
+    .sp-layer-items { list-style:none;display:flex;flex-direction:column;gap:10px; }
+    .sp-layer-items li { font-size:15px;font-style:italic;color:var(--faint);line-height:1.4; }
+    .sp-divider { width:100%;height:1px;background:linear-gradient(to right,transparent,rgba(200,155,60,0.15),transparent);margin:0 0 80px; }
+    .sp-notes { }
+    .sp-note { padding:28px 0;border-bottom:1px solid rgba(200,155,60,0.07); }
+    .sp-note-title { font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:var(--cream);margin-bottom:8px; }
+    .sp-note-body { font-size:14px;line-height:1.75;color:#b8a888;font-style:italic;white-space:pre-line; }
+    .sp-note-tag { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c89b3c;border:1px solid rgba(200,155,60,0.2);padding:4px 10px;display:inline-block;margin-top:12px; }
+    @media(max-width:960px){
+      .sp-nav{ padding:20px 24px; }
+      .sp-hero{ padding:0 24px 70px; }
+      .sp-body{ padding:70px 24px; }
+      .sp-grid{ grid-template-columns:1fr;gap:52px; }
+      .sp-layers{ grid-template-columns:1fr;gap:20px; }
+      .sp-price-row{ flex-wrap:wrap;gap:16px; }
+    }
+  </style>
+
+  <nav class="sp-nav">
+    <a href="#" class="sp-back" data-back>The Collection</a>
+    <a href="#" class="sp-logo" data-back>LUCKY OBSCURA</a>
+  </nav>
+
+  <div class="sp-hero">
+    <div class="sp-hero-bg"></div>
+    <span class="sp-num">Obscura No. 01</span>
+    <h1 class="sp-title">CEDAR<br>DUSK</h1>
+    <p class="sp-tagline">Cold wood. Iron light. A low amber burning.</p>
+    <div class="sp-price-row">
+      <span class="sp-price">45 €</span>
+      <span class="sp-type">Extrait de Parfum · 30ml</span>
+      <a href="#" class="sp-buy">Add to Order</a>
+    </div>
+  </div>
+
+  <div class="sp-body">
+    <div class="sp-grid">
+      <div>
+        <span class="sp-section-label">The composition</span>
+        <h2 class="sp-section-title">MOOD &amp;<br>CHARACTER</h2>
+        <p class="sp-mood">Cedar Dusk opens with a sharp, mineral dryness — Iso E Super at controlled concentration, enough to project without dominating. The cedarwood arrives mid-wear, grounded and slightly smoky through the guaiacwood accord. Vetiver pulls the base into earth and shadow. The amber glow is restrained. It never sweetens. It only deepens.</p>
+      </div>
+      <div>
+        <span class="sp-section-label">Ingredients</span>
+        <h2 class="sp-section-title">STRUCTURE</h2>
+        <div class="sp-layers">
+          <div class="sp-layer-top">
+            <div class="sp-layer-title">Top</div>
+            <ul class="sp-layer-items">
+              <li>Iso E Super</li>
+              <li>Black Pepper</li>
+            </ul>
+          </div>
+          <div class="sp-layer-mid">
+            <div class="sp-layer-title">Heart</div>
+            <ul class="sp-layer-items">
+              <li>Cedarwood</li>
+              <li>Guaiacwood</li>
+            </ul>
+          </div>
+          <div class="sp-layer-base">
+            <div class="sp-layer-title">Base</div>
+            <ul class="sp-layer-items">
+              <li>Vetiver</li>
+              <li>Galaxolide</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp-divider"></div>
+
+    <span class="sp-section-label">From the laboratory</span>
+    <h2 class="sp-section-title">DEVELOPMENT<br>NOTES</h2>
+    <div class="sp-notes">
+      <div class="sp-note">
+        <div class="sp-note-title">CEDAR-VETIVER ACCORD — CV-03</div>
+        <p class="sp-note-body">Cedarwood Virginia with vetiver bourbon.
+Iso E Super introduced at 15% — smoky diffusion without aggression.
+→ Foundation for Cedar Dusk.</p>
+        <span class="sp-note-tag">Accord Development</span>
+      </div>
+      <div class="sp-note">
+        <div class="sp-note-title">ISO E SUPER — CONCENTRATION STUDY</div>
+        <p class="sp-note-body">Tested at 5%, 10%, 20% in alcohol on strips.
+5%: almost imperceptible. 10%: clean balance, good projection.
+20%: overpowers, headache-inducing.
+→ 10% ceiling for Cedar Dusk.</p>
+        <span class="sp-note-tag">Material Study</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SUBPAGE: NOIR PÉTALE                        -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="subpage" id="page-noir-petale" style="display:none;">
+  <nav class="sp-nav">
+    <a href="#" class="sp-back" data-back>The Collection</a>
+    <a href="#" class="sp-logo" data-back>LUCKY OBSCURA</a>
+  </nav>
+
+  <div class="sp-hero">
+    <div class="sp-hero-bg" style="background:radial-gradient(ellipse at 70% 50%,rgba(200,155,60,0.05) 0%,transparent 60%);"></div>
+    <span class="sp-num">Obscura No. 02</span>
+    <h1 class="sp-title">NOIR<br>PÉTALE</h1>
+    <p class="sp-tagline">Petals pressed in dark resin. Still. Unresolved.</p>
+    <div class="sp-price-row">
+      <span class="sp-price">45 €</span>
+      <span class="sp-type">Extrait de Parfum · 30ml</span>
+      <a href="#" class="sp-buy">Add to Order</a>
+    </div>
+  </div>
+
+  <div class="sp-body">
+    <div class="sp-grid">
+      <div>
+        <span class="sp-section-label">The composition</span>
+        <h2 class="sp-section-title">MOOD &amp;<br>CHARACTER</h2>
+        <p class="sp-mood">Noir Pétale is a floral that refuses to be soft. Hedione opens it with a transparent, jasmine-like lift — then rose absolute arrives, dark and waxy rather than fresh. Geranium adds an unexpected green edge. The base is amber built from labdanum and benzoin: resinous, warm, slow to fade. This is a floral for people who don't usually wear florals.</p>
+      </div>
+      <div>
+        <span class="sp-section-label">Ingredients</span>
+        <h2 class="sp-section-title">STRUCTURE</h2>
+        <div class="sp-layers">
+          <div class="sp-layer-top">
+            <div class="sp-layer-title">Top</div>
+            <ul class="sp-layer-items">
+              <li>Hedione</li>
+              <li>Bergamot</li>
+            </ul>
+          </div>
+          <div class="sp-layer-mid">
+            <div class="sp-layer-title">Heart</div>
+            <ul class="sp-layer-items">
+              <li>Rose Absolute</li>
+              <li>Geranium</li>
+            </ul>
+          </div>
+          <div class="sp-layer-base">
+            <div class="sp-layer-title">Base</div>
+            <ul class="sp-layer-items">
+              <li>Labdanum</li>
+              <li>Benzoin</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp-divider"></div>
+
+    <span class="sp-section-label">From the laboratory</span>
+    <h2 class="sp-section-title">DEVELOPMENT<br>NOTES</h2>
+    <div class="sp-notes">
+      <div class="sp-note">
+        <div class="sp-note-title">DARK FLORAL — NP-02</div>
+        <p class="sp-note-body">Rose absolute + patchouli + trace oud.
+Very dark floral profile. Oud pulls masculine above 3%.
+Hedione at 8% lifts without sweetening.
+→ Confirmed direction for Noir Pétale.</p>
+        <span class="sp-note-tag">Development</span>
+      </div>
+      <div class="sp-note">
+        <div class="sp-note-title">AMBER STRUCTURE — AS-02</div>
+        <p class="sp-note-body">Ambroxan, labdanum, and benzoin tested in three ratios.
+Version B produced the smoothest drydown.
+→ Possible base for Noir Pétale and Series II.</p>
+        <span class="sp-note-tag">Base Accord</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SUBPAGE: QUIET PROJECTION                   -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="subpage" id="page-quiet-projection" style="display:none;">
+  <nav class="sp-nav">
+    <a href="#" class="sp-back" data-back>The Collection</a>
+    <a href="#" class="sp-logo" data-back>LUCKY OBSCURA</a>
+  </nav>
+
+  <div class="sp-hero">
+    <div class="sp-hero-bg" style="background:radial-gradient(ellipse at 50% 40%,rgba(200,155,60,0.05) 0%,transparent 55%);"></div>
+    <span class="sp-num">Obscura No. 03</span>
+    <h1 class="sp-title">QUIET<br>PROJECTION</h1>
+    <p class="sp-tagline">Daylight through glass. Something moving in still air.</p>
+    <div class="sp-price-row">
+      <span class="sp-price">45 €</span>
+      <span class="sp-type">Extrait de Parfum · 30ml</span>
+      <a href="#" class="sp-buy">Add to Order</a>
+    </div>
+  </div>
+
+  <div class="sp-body">
+    <div class="sp-grid">
+      <div>
+        <span class="sp-section-label">The composition</span>
+        <h2 class="sp-section-title">MOOD &amp;<br>CHARACTER</h2>
+        <p class="sp-mood">Quiet Projection opens bright — bergamot and grapefruit, clean and immediate. Then Hedione takes over: a transparent, weightless quality that diffuses into the air rather than sitting on skin. Iso E Super adds a woody shimmer in the heart. Ambroxan in the base gives it staying power without heaviness. This is the lightest composition in Series I. Effortless to wear. Harder to stop noticing.</p>
+      </div>
+      <div>
+        <span class="sp-section-label">Ingredients</span>
+        <h2 class="sp-section-title">STRUCTURE</h2>
+        <div class="sp-layers">
+          <div class="sp-layer-top">
+            <div class="sp-layer-title">Top</div>
+            <ul class="sp-layer-items">
+              <li>Bergamot</li>
+              <li>Grapefruit</li>
+            </ul>
+          </div>
+          <div class="sp-layer-mid">
+            <div class="sp-layer-title">Heart</div>
+            <ul class="sp-layer-items">
+              <li>Hedione</li>
+              <li>Iso E Super</li>
+            </ul>
+          </div>
+          <div class="sp-layer-base">
+            <div class="sp-layer-title">Base</div>
+            <ul class="sp-layer-items">
+              <li>Ambroxan</li>
+              <li>Habanolide</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp-divider"></div>
+
+    <span class="sp-section-label">From the laboratory</span>
+    <h2 class="sp-section-title">DEVELOPMENT<br>NOTES</h2>
+    <div class="sp-notes">
+      <div class="sp-note">
+        <div class="sp-note-title">MINERAL CITRUS STUDY — MC-01</div>
+        <p class="sp-note-body">Bergamot and grapefruit with Calone at trace levels.
+Unexpected lift when Hedione exceeded 20%.
+→ Direction for Quiet Projection.</p>
+        <span class="sp-note-tag">Material Study</span>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
