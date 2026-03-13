@@ -508,9 +508,26 @@ footer {
 }
 .materials-chemicals {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  gap: 32px;
   margin: 44px 0;
+}
+.chem-group { }
+.chem-group-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 8px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(200,155,60,0.5);
+  display: block;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(200,155,60,0.08);
+}
+.chem-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 .chem-tag {
   font-family: 'Courier Prime', monospace;
@@ -536,13 +553,7 @@ footer {
   margin-top: 44px;
 }
 
-@media(max-width:960px){
-  .materials { padding: 80px 24px; }
-  .materials-inner { grid-template-columns: 1fr; gap: 48px; }
-  .materials-left { position: static; }
-  .collection-lines { grid-template-columns:1fr 1fr;gap:0; }
-  .materials-title { font-size:64px; }
-}
+/* materials mobile handled in main responsive block */
 
 /* ── HAMBURGER ── */
 .nav-hamburger {
@@ -601,60 +612,89 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
+  /* Prevent ANY horizontal overflow causing zoom-out */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  * { max-width: 100%; }
+
   /* Nav */
   nav{ padding:20px 24px; }
   .nav-links{ display:none; }
   .nav-hamburger{ display:flex; }
 
-  /* Hero */
-  .hero{ padding:110px 28px 80px; }
+  /* Hero — tighten letter-spacing to prevent overflow */
+  .hero{ padding:110px 20px 80px; }
   .hero-rule-left, .hero-rule-right{ display:none; }
-  .hero-lo{ margin-bottom:40px; }
-  .hero-lo-letters{ font-size:clamp(80px,20vw,120px); letter-spacing:20px; text-indent:20px; }
-  .hero-lo::before{ width:260px; height:260px; }
-  .hero-wordmark{ font-size:clamp(20px,6vw,28px); letter-spacing:5px; }
-  .hero-sub{ font-size:9px; letter-spacing:3px; }
-  .hero-body{ font-size:17px; }
-  .hero-body-small{ font-size:14px; }
+  .hero-lo{ margin-bottom:36px; }
+  .hero-lo-letters{ font-size:clamp(64px,18vw,100px); letter-spacing:12px; text-indent:12px; }
+  .hero-lo::before{ width:200px; height:200px; }
+  .hero-wordmark{ font-size:clamp(18px,5.5vw,26px); letter-spacing:4px; }
+  .hero-sub{ font-size:8px; letter-spacing:2px; }
+  .hero-body{ font-size:19px; max-width:100%; }
+  .hero-body-small{ font-size:13px; max-width:100%; }
   .hero-cta{ flex-direction:column; gap:14px; width:100%; }
-  .btn-solid, .btn-outline{ width:100%; text-align:center; padding:16px 24px; }
+  .btn-solid, .btn-outline{ width:100%; text-align:center; padding:16px 24px; box-sizing:border-box; }
 
   /* Collection */
-  .collection{ padding:110px 24px; }
+  .collection{ padding:90px 20px; }
+  .collection-title{ font-size:56px; letter-spacing:2px; }
+  .collection-lines{ grid-template-columns:1fr 1fr; }
+  .collection-line{ padding-right:16px; margin-right:0; }
+  .cl-name{ font-size:16px; letter-spacing:2px; }
   .scent-grid{ grid-template-columns:1fr; gap:1px; }
-  .scent-card{ padding:40px 28px; }
-  .scent-layers{ grid-template-columns:1fr; gap:20px; border-top:none; padding-top:0; }
+  .scent-card{ padding:40px 20px; }
+  .scent-name{ font-size:34px; letter-spacing:2px; }
+  .scent-layers{ grid-template-columns:repeat(3,1fr); gap:12px; }
+
+  /* Discovery */
+  .discovery{ padding:90px 20px; }
+  .discovery-inner{ grid-template-columns:1fr; gap:48px; }
+  .discovery-heading{ font-size:48px; letter-spacing:2px; }
+  .discovery-card{ padding:40px 28px; }
 
   /* Materials */
-  .materials{ padding:110px 24px; }
+  .materials{ padding:90px 20px; }
   .materials-inner{ grid-template-columns:1fr; gap:40px; }
   .materials-left{ position:static; }
-  .materials-title{ font-size:56px; }
-  .materials-para{ font-size:18px; }
+  .materials-title{ font-size:52px; letter-spacing:2px; }
+  .materials-para{ font-size:17px; }
+  .materials-chemicals{ gap:8px; }
+  .chem-tag{ font-size:8px; padding:6px 10px; }
 
   /* Lab */
-  .lab{ padding:110px 24px; }
+  .lab{ padding:90px 20px; }
+  .lab-title{ font-size:52px; letter-spacing:2px; }
   .lab-head{ flex-direction:column; gap:20px; align-items:flex-start; }
-  .lab-intro{ text-align:left; max-width:100%; }
-  .note{ grid-template-columns:1fr; gap:12px; padding:28px 0; }
+  .lab-intro{ text-align:left; max-width:100%; font-size:13px; }
+  .note{ grid-template-columns:1fr; gap:10px; padding:28px 0; }
   .note-date{ display:none; }
+  .note-title{ font-size:17px; letter-spacing:1px; }
+  .note-body{ font-size:13px; }
   .note-tag{ align-self:flex-start; }
 
   /* Perfumer */
-  .perfumer{ padding:110px 24px; grid-template-columns:1fr; gap:48px; }
+  .perfumer{ padding:90px 20px; grid-template-columns:1fr; gap:48px; }
   .perfumer-portrait{ order:-1; aspect-ratio:4/5; }
-  .perfumer-heading{ font-size:44px; }
+  .perfumer-heading{ font-size:44px; letter-spacing:2px; }
   .perfumer-text{ font-size:17px; }
+  .perfumer-sig{ font-size:26px; }
 
-  .promise-track { animation-duration: 10s; }
+  /* Promise strip */
+  .promise-track{ animation-duration:10s; }
+  .promise-item{ font-size:8px; padding:0 28px; }
+
+  /* Footer */
   .footer-inner{ grid-template-columns:1fr; gap:40px; margin-bottom:48px; }
-  footer{ padding:80px 24px 36px; }
+  footer{ padding:80px 20px 36px; }
+  .footer-name{ font-size:22px; letter-spacing:4px; }
   .footer-bottom{ flex-direction:column; gap:12px; text-align:center; }
+
+  /* Mobile drawer */
+  .nav-drawer a{ font-size:36px; letter-spacing:3px; }
 }
 
 /* ── SUBPAGES ── */
 .sp-nav { display:none;position:fixed;top:0;left:0;right:0;z-index:200;justify-content:space-between;align-items:center;padding:28px 72px;background:linear-gradient(to bottom,rgba(5,5,5,0.97),transparent); }
-.subpage:not([style*="display:none"]) .sp-nav { display:flex; }
+.sp-nav.active { display:flex; }
 .sp-back { font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .3s,border-color .3s;cursor:none;border:1px solid rgba(200,155,60,0.25);padding:10px 20px; }
 .sp-back:hover { color:#c89b3c;border-color:rgba(200,155,60,0.6); }
 .sp-logo { font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;letter-spacing:5px;text-transform:uppercase;color:var(--cream);text-decoration:none;transition:color .3s;cursor:none; }
@@ -691,12 +731,19 @@ footer {
 .sp-note-body { font-size:14px;line-height:1.75;color:#b8a888;font-style:italic; }
 .sp-note-tag { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c89b3c;border:1px solid rgba(200,155,60,0.2);padding:4px 10px;display:inline-block;margin-top:12px; }
 @media(max-width:960px){
-  .sp-nav{ padding:20px 24px; }
-  .sp-hero{ padding:90px 24px 70px; }
-  .sp-body{ padding:70px 24px; }
-  .sp-grid{ grid-template-columns:1fr;gap:52px; }
-  .sp-layers{ grid-template-columns:1fr;gap:20px; }
-  .sp-price-row{ flex-wrap:wrap;gap:16px; }
+  .sp-nav{ padding:18px 20px; }
+  .sp-back{ font-size:8px; letter-spacing:2px; padding:8px 14px; }
+  .sp-logo{ font-size:12px; letter-spacing:3px; }
+  .sp-hero{ padding:90px 20px 60px; min-height:60vh; }
+  .sp-title{ font-size:clamp(48px,14vw,80px); letter-spacing:2px; }
+  .sp-tagline{ font-size:17px; max-width:100%; }
+  .sp-price-row{ flex-wrap:wrap; gap:16px; }
+  .sp-price{ font-size:36px; }
+  .sp-body{ padding:60px 20px; }
+  .sp-grid{ grid-template-columns:1fr; gap:48px; margin-bottom:60px; }
+  .sp-section-title{ font-size:36px; letter-spacing:2px; }
+  .sp-layers{ grid-template-columns:repeat(3,1fr); gap:16px; }
+  .sp-mood{ font-size:16px; }
 }
 </style>
 </head>
@@ -707,7 +754,7 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
+  <a href="javascript:void(0)" class="nav-logo" onclick="showPage(null)">
     <span class="nav-logo-mark">LO</span>
     <div class="nav-logo-rule"></div>
     <span class="nav-logo-name">LUCKY OBSCURA</span>
@@ -899,16 +946,49 @@ footer {
         <p class="materials-para reveal">Each composition begins with a single material, studied alone before it meets another.</p>
 
         <div class="materials-chemicals reveal">
-          <span class="chem-tag">Cedarwood</span>
-          <span class="chem-tag">Ambroxan</span>
-          <span class="chem-tag">Hedione</span>
-          <span class="chem-tag">Vetiver</span>
-          <span class="chem-tag">Iso E Super</span>
-          <span class="chem-tag">Labdanum</span>
-          <span class="chem-tag">Rose Absolute</span>
-          <span class="chem-tag">Benzoin</span>
-          <span class="chem-tag">Galaxolide</span>
-          <span class="chem-tag">Bergamot</span>
+
+          <div class="chem-group">
+            <span class="chem-group-label">Modern Molecules</span>
+            <div class="chem-tags">
+              <span class="chem-tag">Iso E Super™</span>
+              <span class="chem-tag">Ambroxan</span>
+              <span class="chem-tag">Hedione® High Cis</span>
+              <span class="chem-tag">Muscenone®</span>
+              <span class="chem-tag">Cetalox®</span>
+              <span class="chem-tag">Norlimbanol®</span>
+              <span class="chem-tag">Habanolide®</span>
+              <span class="chem-tag">Helvetolide®</span>
+            </div>
+          </div>
+
+          <div class="chem-group">
+            <span class="chem-group-label">Character Materials</span>
+            <div class="chem-tags">
+              <span class="chem-tag">Safraleine®</span>
+              <span class="chem-tag">Calone® 1951</span>
+              <span class="chem-tag">Cashmeran®</span>
+              <span class="chem-tag">Birch Tar</span>
+              <span class="chem-tag">Coumarin</span>
+              <span class="chem-tag">Neo Patchouli</span>
+              <span class="chem-tag">Ambrocenide</span>
+              <span class="chem-tag">Dihydro Alpha Ionone</span>
+            </div>
+          </div>
+
+          <div class="chem-group">
+            <span class="chem-group-label">High Quality Naturals</span>
+            <div class="chem-tags">
+              <span class="chem-tag">Tobacco Absolute</span>
+              <span class="chem-tag">Olibanum Coeur</span>
+              <span class="chem-tag">Oakmoss Absolute</span>
+              <span class="chem-tag">Pink Pepper CO2</span>
+              <span class="chem-tag">Davana Oil</span>
+              <span class="chem-tag">Vetiver Bourbon</span>
+              <span class="chem-tag">Bergamot FCF</span>
+              <span class="chem-tag">Cardamom Signature</span>
+            </div>
+          </div>
+
         </div>
 
         <p class="materials-para reveal">Concentration changes character entirely. That is the work.</p>
@@ -1056,6 +1136,15 @@ footer {
         <span class="note-tag">Formula</span>
       </div>
 
+      <div class="note reveal">
+        <div class="note-date">Mar 2026</div>
+        <div>
+          <div class="note-title">New Materials — Palette Expansion</div>
+          <p class="note-body">Significant addition to the working palette. Musks: Isomuscone, Muscenone, Exaltolide, Habanolide, Helvetolide, Cetalox, Norlimbanol. Florals: Phenyl Ethyl Alcohol, Florol, Linalyl Acetate, Ebanol, Polysantol. Facets: Safraleine, Davana Oil, Elemi Oil, Pink Pepper CO2, Olibanum Coeur, Birch Tar, Oakmoss. Aldehydes: C-11 Undecylenic, C-12 Lauric. Ambery: AmberXtreme, Ambrocenide, Orbitone T Neo, Dihydro Alpha Ionone. Sweet: Vanillin, Maltol, Tonka Bean CO2, Kephalis. Citrus/green: Citral, Cis-3-Hexenol, Hexyl Acetate, Allyl Amyl Glycolate, Pineapple Supreme, Blackcurrant Bud.<br>→ Series II and III now have real range to work with.</p>
+        </div>
+        <span class="note-tag">Palette</span>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1145,10 +1234,15 @@ footer {
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   // ── SUBPAGE ROUTER ──
-  function showPage(id) {
+  window.showPage = function(id) {
     const mainNav = document.querySelector('nav');
     document.getElementById('main-site').style.display = 'none';
-    document.querySelectorAll('.subpage').forEach(p => p.style.display = 'none');
+    // Hide all subpages and their navs
+    document.querySelectorAll('.subpage').forEach(p => {
+      p.style.display = 'none';
+      const spNav = p.querySelector('.sp-nav');
+      if (spNav) spNav.classList.remove('active');
+    });
     if (id) {
       mainNav.style.display = 'none';
       const page = document.getElementById('page-' + id);
@@ -1156,6 +1250,9 @@ footer {
         page.style.display = 'block';
         page.style.opacity = 0;
         window.scrollTo(0,0);
+        // Show this subpage's nav
+        const spNav = page.querySelector('.sp-nav');
+        if (spNav) spNav.classList.add('active');
         requestAnimationFrame(() => {
           page.style.transition = 'opacity .6s ease';
           page.style.opacity = 1;
@@ -1174,11 +1271,12 @@ footer {
       showPage(el.dataset.page);
     });
   });
-  document.querySelectorAll('[data-back]').forEach(el => {
-    el.addEventListener('click', e => {
+  document.addEventListener('click', e => {
+    const back = e.target.closest('[data-back]');
+    if (back) {
       e.preventDefault();
       showPage(null);
-    });
+    }
   });
 </script>
 
