@@ -33,8 +33,8 @@ body {
 }
 
 /* ── CURSOR ── */
-.cursor { width:1px;height:1px;background:rgba(200,155,60,0.8);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%); }
-.cursor-ring { display:none; }
+.cursor { width:8px;height:8px;background:#c89b3c;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s; }
+.cursor-ring { width:32px;height:32px;border:1px solid rgba(200,155,60,0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .08s ease,top .08s ease; }
 
 /* ── GRAIN ── */
 body::after {
@@ -405,6 +405,28 @@ nav {
 .perfumer-text.small { font-size:16px;color:var(--faint2); }
 .perfumer-sig { margin-top:52px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:34px;color:var(--accent); }
 
+/* ── CONTACT ── */
+.contact-section { padding:140px 72px;max-width:1320px;margin:0 auto; }
+.contact-inner { display:grid;grid-template-columns:1fr 1.6fr;gap:120px;align-items:start; }
+.contact-heading { font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;letter-spacing:4px;line-height:.85;color:var(--cream);margin-bottom:0; }
+.contact-email {
+  font-family:'Courier Prime',monospace;font-size:13px;letter-spacing:2px;
+  color:var(--accent);text-decoration:none;display:block;margin-bottom:48px;
+  transition:color .3s;
+}
+.contact-email:hover { color:var(--cream); }
+.contact-actions { display:flex;flex-direction:column;gap:12px;align-items:flex-start; }
+.contact-btn { font-size:9px;letter-spacing:2.5px; }
+
+@media(max-width:960px){
+  .contact-section{ padding:90px 20px; }
+  .contact-inner{ grid-template-columns:1fr;gap:48px; }
+  .contact-heading{ font-size:52px; }
+  .contact-email{ font-size:11px; }
+  .contact-actions{ width:100%; }
+  .contact-btn{ width:100%;text-align:center; }
+}
+
 /* ── FOOTER ── */
 footer {
   background:var(--black);
@@ -612,7 +634,7 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
-  /* Prevent ANY horizontal overflow causing zoom-out */
+  /* Prevent horizontal overflow */
   html, body { overflow-x: hidden; max-width: 100vw; }
   * { max-width: 100%; }
 
@@ -620,76 +642,112 @@ footer {
   nav{ padding:20px 24px; }
   .nav-links{ display:none; }
   .nav-hamburger{ display:flex; }
+  .nav-logo-mark{ font-size:16px; }
+  .nav-logo-name{ font-size:16px; letter-spacing:4px; }
 
-  /* Hero — tighten letter-spacing to prevent overflow */
-  .hero{ padding:110px 20px 80px; }
+  /* Mobile drawer — larger, more readable */
+  .nav-drawer a{ font-size:40px; letter-spacing:3px; }
+
+  /* Hero */
+  .hero{ padding:120px 24px 90px; }
   .hero-rule-left, .hero-rule-right{ display:none; }
   .hero-lo{ margin-bottom:36px; }
-  .hero-lo-letters{ font-size:clamp(64px,18vw,100px); letter-spacing:12px; text-indent:12px; }
+  .hero-lo-letters{ font-size:clamp(72px,18vw,100px); letter-spacing:10px; text-indent:10px; }
   .hero-lo::before{ width:200px; height:200px; }
-  .hero-wordmark{ font-size:clamp(18px,5.5vw,26px); letter-spacing:4px; }
-  .hero-sub{ font-size:8px; letter-spacing:2px; }
-  .hero-body{ font-size:19px; max-width:100%; }
-  .hero-body-small{ font-size:13px; max-width:100%; }
-  .hero-cta{ flex-direction:column; gap:14px; width:100%; }
-  .btn-solid, .btn-outline{ width:100%; text-align:center; padding:16px 24px; box-sizing:border-box; }
+  .hero-wordmark{ font-size:clamp(22px,6vw,30px); letter-spacing:4px; }
+  .hero-sub{ font-size:10px; letter-spacing:2px; }
+  .hero-body{ font-size:22px; line-height:1.6; max-width:100%; }
+  .hero-body-small{ font-size:15px; line-height:1.8; max-width:100%; }
+  .hero-cta{ flex-direction:column; gap:14px; width:100%; margin-top:44px; }
+  .btn-solid, .btn-outline{ width:100%; text-align:center; padding:18px 24px; font-size:10px; box-sizing:border-box; }
+
+  /* Section labels — more visible */
+  .section-label{ font-size:10px; letter-spacing:3px; color:rgba(200,155,60,0.8); }
 
   /* Collection */
-  .collection{ padding:90px 20px; }
-  .collection-title{ font-size:56px; letter-spacing:2px; }
+  .collection{ padding:90px 24px; }
+  .collection-title{ font-size:58px; letter-spacing:2px; }
+  .collection-intro{ font-size:13px; }
   .collection-lines{ grid-template-columns:1fr 1fr; }
   .collection-line{ padding-right:16px; margin-right:0; }
-  .cl-name{ font-size:16px; letter-spacing:2px; }
-  .scent-grid{ grid-template-columns:1fr; gap:1px; }
-  .scent-card{ padding:40px 20px; }
-  .scent-name{ font-size:34px; letter-spacing:2px; }
-  .scent-layers{ grid-template-columns:repeat(3,1fr); gap:12px; }
+  .cl-name{ font-size:17px; letter-spacing:2px; }
+  .cl-desc{ font-size:9px; }
+  .scent-grid{ grid-template-columns:1fr; gap:2px; }
+  .scent-card{ padding:44px 24px; }
+  .scent-num{ font-size:10px; letter-spacing:3px; margin-bottom:14px; }
+  .scent-name{ font-size:38px; letter-spacing:2px; margin-bottom:14px; }
+  .scent-sub{ font-size:17px; line-height:1.7; margin-bottom:32px; }
+  .scent-layers{ grid-template-columns:repeat(3,1fr); gap:16px; padding-top:24px; }
+  .layer-label{ font-size:9px; }
+  .layer-items li{ font-size:14px; }
+  .scent-type{ font-size:10px; margin-top:28px; padding-top:24px; }
 
   /* Discovery */
-  .discovery{ padding:90px 20px; }
+  .discovery{ padding:90px 24px; }
   .discovery-inner{ grid-template-columns:1fr; gap:48px; }
-  .discovery-heading{ font-size:48px; letter-spacing:2px; }
+  .discovery-heading{ font-size:52px; letter-spacing:2px; }
+  .discovery-desc{ font-size:17px; }
+  .discovery-note{ font-size:10px; line-height:2; }
   .discovery-card{ padding:40px 28px; }
+  .discovery-brand{ font-size:26px; }
+  .discovery-scent-name{ font-size:20px; }
+  .discovery-price{ font-size:42px; }
+  .discovery-btn{ font-size:10px; padding:14px 32px; }
 
   /* Materials */
-  .materials{ padding:90px 20px; }
-  .materials-inner{ grid-template-columns:1fr; gap:40px; }
+  .materials{ padding:90px 24px; }
+  .materials-inner{ grid-template-columns:1fr; gap:44px; }
   .materials-left{ position:static; }
-  .materials-title{ font-size:52px; letter-spacing:2px; }
-  .materials-para{ font-size:17px; }
-  .materials-chemicals{ gap:8px; }
-  .chem-tag{ font-size:8px; padding:6px 10px; }
+  .materials-title{ font-size:56px; letter-spacing:2px; }
+  .materials-para{ font-size:19px; line-height:1.9; }
+  .materials-note{ font-size:10px; }
+  .chem-group-label{ font-size:9px; }
+  .chem-tag{ font-size:10px; padding:8px 14px; }
+  .materials-closing{ font-size:16px; }
 
   /* Lab */
-  .lab{ padding:90px 20px; }
-  .lab-title{ font-size:52px; letter-spacing:2px; }
+  .lab{ padding:90px 24px; }
+  .lab-title{ font-size:56px; letter-spacing:2px; }
   .lab-head{ flex-direction:column; gap:20px; align-items:flex-start; }
-  .lab-intro{ text-align:left; max-width:100%; font-size:13px; }
-  .note{ grid-template-columns:1fr; gap:10px; padding:28px 0; }
-  .note-date{ display:none; }
-  .note-title{ font-size:17px; letter-spacing:1px; }
-  .note-body{ font-size:13px; }
-  .note-tag{ align-self:flex-start; }
+  .lab-intro{ text-align:left; max-width:100%; font-size:15px; }
+  .note{ grid-template-columns:1fr; gap:12px; padding:36px 0; }
+  .note-date{ display:block; font-size:10px; letter-spacing:2px; color:rgba(200,155,60,0.6); padding-top:0; margin-bottom:4px; }
+  .note-title{ font-size:18px; letter-spacing:1px; color:var(--cream); margin-bottom:12px; }
+  .note-body{ font-size:15px; line-height:1.85; color:#c8b89a; }
+  .note-tag{ align-self:flex-start; font-size:9px; padding:6px 12px; }
 
   /* Perfumer */
-  .perfumer{ padding:90px 20px; grid-template-columns:1fr; gap:48px; }
+  .perfumer{ padding:90px 24px; grid-template-columns:1fr; gap:48px; }
   .perfumer-portrait{ order:-1; aspect-ratio:4/5; }
-  .perfumer-heading{ font-size:44px; letter-spacing:2px; }
-  .perfumer-text{ font-size:17px; }
-  .perfumer-sig{ font-size:26px; }
+  .perfumer-heading{ font-size:48px; letter-spacing:2px; }
+  .perfumer-text{ font-size:18px; line-height:1.9; }
+  .perfumer-text.small{ font-size:16px; }
+  .perfumer-sig{ font-size:28px; }
 
   /* Promise strip */
-  .promise-track{ animation-duration:10s; }
-  .promise-item{ font-size:8px; padding:0 28px; }
+  .promise-track{ animation-duration:12s; }
+  .promise-item{ font-size:9px; padding:0 32px; }
+
+  /* Contact */
+  .contact-section{ padding:90px 24px; }
+  .contact-inner{ grid-template-columns:1fr; gap:44px; }
+  .contact-heading{ font-size:56px; letter-spacing:2px; }
+  .contact-email{ font-size:12px; letter-spacing:1px; }
+  .contact-actions{ width:100%; }
+  .contact-btn{ width:100%; text-align:center; font-size:10px; padding:16px 24px; }
 
   /* Footer */
-  .footer-inner{ grid-template-columns:1fr; gap:40px; margin-bottom:48px; }
-  footer{ padding:80px 20px 36px; }
-  .footer-name{ font-size:22px; letter-spacing:4px; }
+  .footer-inner{ grid-template-columns:1fr; gap:44px; margin-bottom:52px; }
+  footer{ padding:80px 24px 40px; }
+  .footer-name{ font-size:24px; letter-spacing:4px; }
+  .footer-tagline{ font-size:16px; }
+  .footer-links a{ font-size:17px; }
+  .footer-col-label{ font-size:10px; }
   .footer-bottom{ flex-direction:column; gap:12px; text-align:center; }
+  .footer-copy{ font-size:10px; color:rgba(200,184,154,0.35); }
 
-  /* Mobile drawer */
-  .nav-drawer a{ font-size:36px; letter-spacing:3px; }
+  /* Title rules */
+  .title-rule{ margin:16px 0 28px; }
 }
 
 /* ── SUBPAGES ── */
@@ -731,19 +789,26 @@ footer {
 .sp-note-body { font-size:14px;line-height:1.75;color:#b8a888;font-style:italic; }
 .sp-note-tag { font-family:'Courier Prime',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c89b3c;border:1px solid rgba(200,155,60,0.2);padding:4px 10px;display:inline-block;margin-top:12px; }
 @media(max-width:960px){
-  .sp-nav{ padding:18px 20px; }
-  .sp-back{ font-size:8px; letter-spacing:2px; padding:8px 14px; }
-  .sp-logo{ font-size:12px; letter-spacing:3px; }
-  .sp-hero{ padding:90px 20px 60px; min-height:60vh; }
-  .sp-title{ font-size:clamp(48px,14vw,80px); letter-spacing:2px; }
-  .sp-tagline{ font-size:17px; max-width:100%; }
+  .sp-nav{ padding:18px 24px; }
+  .sp-back{ font-size:9px; letter-spacing:2px; padding:9px 16px; }
+  .sp-logo{ font-size:13px; letter-spacing:3px; }
+  .sp-hero{ padding:100px 24px 64px; min-height:60vh; }
+  .sp-title{ font-size:clamp(52px,14vw,80px); letter-spacing:2px; }
+  .sp-tagline{ font-size:19px; line-height:1.7; max-width:100%; margin-bottom:36px; }
   .sp-price-row{ flex-wrap:wrap; gap:16px; }
-  .sp-price{ font-size:36px; }
-  .sp-body{ padding:60px 20px; }
+  .sp-price{ font-size:40px; }
+  .sp-type{ font-size:10px; }
+  .sp-buy{ font-size:10px; padding:15px 32px; width:100%; text-align:center; box-sizing:border-box; }
+  .sp-body{ padding:64px 24px; }
   .sp-grid{ grid-template-columns:1fr; gap:48px; margin-bottom:60px; }
-  .sp-section-title{ font-size:36px; letter-spacing:2px; }
+  .sp-section-label{ font-size:10px; }
+  .sp-section-title{ font-size:38px; letter-spacing:2px; margin-bottom:24px; }
+  .sp-mood{ font-size:17px; line-height:1.9; }
   .sp-layers{ grid-template-columns:repeat(3,1fr); gap:16px; }
-  .sp-mood{ font-size:16px; }
+  .sp-layer-title{ font-size:9px; }
+  .sp-layer-items li{ font-size:15px; }
+  .sp-note-title{ font-size:16px; letter-spacing:1px; }
+  .sp-note-body{ font-size:14px; line-height:1.8; }
 }
 </style>
 </head>
@@ -1083,66 +1148,75 @@ footer {
       </div>
 
       <div class="note reveal">
-        <div class="note-date">Nov 2024</div>
+        <div class="note-date">Oct 2025</div>
         <div>
-          <div class="note-title">Cedar-Vetiver Accord — CV-03</div>
-          <p class="note-body">Iso E Super at 15%. Smoky without aggression.<br>→ Foundation for Cold Current.</p>
+          <div class="note-title">Cedar–Vetiver Study — CV-03</div>
+          <p class="note-body">Iso E Super stabilised at 15%.<br>Smoke appears without bitterness.<br><br>→ Structural direction for Cold Current</p>
         </div>
-        <span class="note-tag">Accord Development</span>
+        <span class="note-tag">Accord Study</span>
       </div>
 
       <div class="note reveal">
-        <div class="note-date">Dec 2024</div>
+        <div class="note-date">Nov 2025</div>
         <div>
-          <div class="note-title">Mineral Citrus Study — MC-01</div>
-          <p class="note-body">Hedione above 20% — unexpected lift.<br>→ Direction for White Corridor.</p>
-        </div>
-        <span class="note-tag">Material Study</span>
-      </div>
-
-      <div class="note reveal">
-        <div class="note-date">Jan 2025</div>
-        <div>
-          <div class="note-title">Dark Floral — NP-02</div>
-          <p class="note-body">Rose absolute. Oud above 3% pulls too masculine.<br>→ Confirmed direction for Velvet Smoke.</p>
-        </div>
-        <span class="note-tag">Development</span>
-      </div>
-
-      <div class="note reveal">
-        <div class="note-date">Mar 2025</div>
-        <div>
-          <div class="note-title">Iso E Super — Concentration Study</div>
-          <p class="note-body">5%: imperceptible. 10%: balanced. 20%: aggressive.<br>→ Ceiling set at 10%.</p>
+          <div class="note-title">Iso E Super — Diffusion Study</div>
+          <p class="note-body">5% — nearly imperceptible<br>10% — balanced diffusion<br>20% — intrusive<br><br>→ Practical ceiling fixed at 10%</p>
         </div>
         <span class="note-tag">Material Study</span>
       </div>
 
       <div class="note reveal">
-        <div class="note-date">May 2025</div>
+        <div class="note-date">Dec 2025</div>
         <div>
           <div class="note-title">Amber Structure — AS-02</div>
-          <p class="note-body">Ambroxan, labdanum, benzoin. Version B: smoothest drydown.<br>→ Base for Velvet Smoke and Series II.</p>
+          <p class="note-body">Ambroxan paired with labdanum and benzoin.<br>Version B produced the smoothest drydown.<br><br>→ Base architecture for Velvet Smoke</p>
         </div>
         <span class="note-tag">Base Accord</span>
       </div>
 
       <div class="note reveal">
-        <div class="note-date">Ongoing</div>
+        <div class="note-date">Jan 2026</div>
         <div>
-          <div class="note-title">Series II — Prototype GYM-BL-03</div>
-          <p class="note-body">Dihydromyrcenol too metallic. Vetiver base is solid.<br>→ Not ready.</p>
+          <div class="note-title">Variant System — Library Method</div>
+          <p class="note-body">Three-variant structure adopted across the accord library.<br><br>A — balanced reference<br>B — projection and emphasis<br>C — structural character shift</p>
         </div>
-        <span class="note-tag">Formula</span>
+        <span class="note-tag">Framework</span>
+      </div>
+
+      <div class="note reveal">
+        <div class="note-date">Feb 2026</div>
+        <div>
+          <div class="note-title">Seductive Amber Accord — ACD-SEDUC-01</div>
+          <p class="note-body">Oriental heart rebuilt around labdanum and benzoin.<br>Coumarin and tonka deepen warmth.<br>Oakmoss introduces shadow.<br><br>A — rich oriental · B — gourmand · C — dark oriental</p>
+        </div>
+        <span class="note-tag">Heart Accord</span>
       </div>
 
       <div class="note reveal">
         <div class="note-date">Mar 2026</div>
         <div>
-          <div class="note-title">New Materials — Palette Expansion</div>
-          <p class="note-body">Significant addition to the working palette. Musks: Isomuscone, Muscenone, Exaltolide, Habanolide, Helvetolide, Cetalox, Norlimbanol. Florals: Phenyl Ethyl Alcohol, Florol, Linalyl Acetate, Ebanol, Polysantol. Facets: Safraleine, Davana Oil, Elemi Oil, Pink Pepper CO2, Olibanum Coeur, Birch Tar, Oakmoss. Aldehydes: C-11 Undecylenic, C-12 Lauric. Ambery: AmberXtreme, Ambrocenide, Orbitone T Neo, Dihydro Alpha Ionone. Sweet: Vanillin, Maltol, Tonka Bean CO2, Kephalis. Citrus/green: Citral, Cis-3-Hexenol, Hexyl Acetate, Allyl Amyl Glycolate, Pineapple Supreme, Blackcurrant Bud.<br>→ Series II and III now have real range to work with.</p>
+          <div class="note-title">Spiced Tobacco Accord — ACD-TOB-01</div>
+          <p class="note-body">Tobacco absolute structured with vanilla, resins and spice.<br>Safraleine sharpens the leather facet.<br>Davana introduces fruit behind smoke.<br><br>A — dry leaf · B — pipe tobacco · C — smoked and fruity</p>
+        </div>
+        <span class="note-tag">Heart Accord</span>
+      </div>
+
+      <div class="note reveal">
+        <div class="note-date">Mar 2026</div>
+        <div>
+          <div class="note-title">Palette Expansion</div>
+          <p class="note-body">Working palette expanded across musks, amber woods, aldehydes and resins.<br>New structures now possible across fresh, amber and tobacco compositions.<br><br>→ Series II development begins</p>
         </div>
         <span class="note-tag">Palette</span>
+      </div>
+
+      <div class="note reveal">
+        <div class="note-date">Ongoing</div>
+        <div>
+          <div class="note-title">Series II Prototypes</div>
+          <p class="note-body">Fresh masculine structures under development.<br>Vetiver base promising.<br>Opening unresolved.</p>
+        </div>
+        <span class="note-tag">Formula</span>
       </div>
 
     </div>
@@ -1165,6 +1239,26 @@ footer {
       <p class="perfumer-text">Lucky Obscura is the work of <em>Žan Sedej</em> — a self-taught perfumer working from a private studio in Ljubljana.</p>
       <p class="perfumer-text small">Each composition is developed over months. Resolved or discarded. Nothing in between.</p>
       <div class="perfumer-sig">— Žan</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="section-divider"></div>
+<section class="contact-section reveal">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <span class="section-label">Contact</span>
+      <h2 class="contact-heading">Get<br>in touch</h2>
+      <span class="title-rule"></span>
+    </div>
+    <div class="contact-right">
+      <a href="/cdn-cgi/l/email-protection#18627976366b7d7c7d72686a7729587f75797174367b7775" class="contact-email"><span class="__cf_email__" data-cfemail="6218030c4c110706070812100d5322050f030b0e4c010d0f">[email&#160;protected]</span></a>
+      <div class="contact-actions">
+        <a href="/cdn-cgi/l/email-protection#f08a919ede839594959a80829fc1b0979d91999cde939f9dcf8385929a959384cdb49983939f86958289d0a39584d0127064d0a295839582869184999f9e" class="btn-outline contact-btn">Reserve a Discovery Set</a>
+        <a href="/cdn-cgi/l/email-protection#4a302b2464392f2e2f203a38257b0a2d272b23266429252775393f28202f293e7705382e2f386a0f243b3f233833" class="btn-outline contact-btn">Order Enquiry</a>
+        <a href="/cdn-cgi/l/email-protection#f18b909fdf829495949b81839ec0b1969c90989ddf929e9cce8284939b949285ccb6949f9483909d" class="btn-outline contact-btn">Write to Us</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1193,19 +1287,19 @@ footer {
       <span class="footer-col-label">Connect</span>
       <ul class="footer-links">
         <li><a href="#">Instagram</a></li>
-        <li><a href="#">Email</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#c1bba0afefb2a4a5a4abb1b3aef081a6aca0a8adefa2aeac">Email</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2025 Lucky Obscura. All rights reserved.</span>
+    <span class="footer-copy">© 2026 Lucky Obscura. All rights reserved.</span>
     <span class="footer-copy">Series I. More to come.</span>
   </div>
 </footer>
 
 </div><!-- /#main-site -->
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const burger = document.getElementById('hamburger');
   const drawer = document.getElementById('drawer');
   burger.addEventListener('click', () => {
@@ -1222,9 +1316,12 @@ footer {
   });
 
   const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove',e=>{
-    cursor.style.left=e.clientX+'px';
-    cursor.style.top=e.clientY+'px';
+  const ring   = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    ring.style.left   = e.clientX + 'px';
+    ring.style.top    = e.clientY + 'px';
   });
   const io=new IntersectionObserver(entries=>{
     entries.forEach((e,i)=>{
@@ -1489,20 +1586,4 @@ footer {
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="sp-divider"></div>
-
-    <span class="sp-section-label">From the laboratory</span>
-    <h2 class="sp-section-title">DEVELOPMENT<br>NOTES</h2>
-    <div class="sp-notes">
-      <div class="sp-note">
-        <div class="sp-note-title">Mineral Citrus Study — MC-01</div>
-        <p class="sp-note-body">Hedione above 20% — unexpected lift.<br>→ Direction for Velvet Smoke.</p>
-        <span class="sp-note-tag">Material Study</span>
-      </div>
-    </div>
-  </div>
-</div>
-</body>
-</html>
+    </
